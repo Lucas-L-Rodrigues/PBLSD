@@ -1,9 +1,13 @@
-// CÓDIGO QUE DECODIFICA TODO O ARQUIVO DO MOUSE
+//CÓDIGO QUE DECODIFICA TODO O ARQUIVO DO MOUSE
 
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <sys/time.h> // Include sys/time.h for timeval
+
+struct timeval {
+    long tv_sec;  // segundos
+    long tv_usec; // microssegundos
+};
 
 // Define the input_event struct manually
 struct input_event {
@@ -18,7 +22,7 @@ int main() {
     struct input_event event;
 
     // Open the mouse event file
-    fd = open("/dev/input/event6", O_RDONLY);
+    fd = open("/dev/input/event0", O_RDONLY);
     if (fd == -1) {
         perror("Error opening mouse event file");
         return 1;
@@ -44,5 +48,3 @@ int main() {
 
     // Close the file descriptor
     close(fd);
-    return 0;
-}
