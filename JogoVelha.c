@@ -173,7 +173,7 @@ int main() {
                     // Verifica se houve um botão pressionado, e se sim, qual botão foi usado
                     if (event.type == 1 && (event.code == 272 || event.code == 273) && event.value == 1) {
                         // Print do evento é feito a aprtir dos atributos da struct
-                        if(event.code == 272){
+                        if(event.code == 273){
                             if(cont==9)
                                 cont=1;
                             else
@@ -185,7 +185,7 @@ int main() {
                             printf("Pressione botão direito do mouse para selecionar quadrante: ");
                         }
 
-                        else if(event.code == 273)
+                        else if(event.code == 272)
                             break;
                     }
                 }
