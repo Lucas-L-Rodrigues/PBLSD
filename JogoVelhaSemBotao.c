@@ -1,11 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-// Função para inicializar o tabuleiro com espaços em branco
-void inicializarTabuleiro(char tabuleiro[3][3]) {
+int qualLinha(int cont) {
+    int linha;
+    
+    if (cont <= 3) {
+        linha = 0;
+    } else if (cont <= 6) {
+        linha = 1;
+    } else {
+        linha = 2;
+    }
+
+    return linha;
+}
+
+int qualColuna(int cont) {
+    int coluna;
+    
+    if (cont == 1 || cont == 4 || cont == 7) {
+        coluna = 0;
+    } else if (cont == 2 || cont == 5 || cont == 8) {
+        coluna = 1;
+    } else {
+        coluna = 2;
+    }
+
+    return coluna;
+}
+
+//Função para inicializar o tabuleiro com espaços em branco
+void inicializarTabuleiro(char (*tabuleiro)[3][3]) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            tabuleiro[i][j] = ' ';
+            (*tabuleiro)[i][j] = ' ';
         }
     }
 }
@@ -44,6 +74,7 @@ char verificarVencedor(char (*tabuleiro)[3][3]) {
     return ' ';
 }
 
+//Função para exibição de menus
 void exibirTela(char tipo, char vencedor) {
     printf("\t _________________________________________________ \n");
     
@@ -54,13 +85,13 @@ void exibirTela(char tipo, char vencedor) {
         printf("\t| [Botao 4] Sair                                  |\n");
     } 
     else if (tipo == 'v') {
-        printf("\t|              O jogador %c venceu!                |\n", vencedor);
+        printf("\t|              \033[0;32mO jogador %c venceu!\033[0m                |\n", vencedor);
         printf("\t| ----------------------------------------------- |\n");
         printf("\t| [Botao 1] Jogar novamente                       |\n");
         printf("\t| [Botao 4] Sair                                  |\n");
     } 
     else if (tipo == 'e') {
-        printf("\t|                 O jogo empatou.                 |\n");
+        printf("\t|                 \033[0;31mO jogo empatou.\033[0m                 |\n");
         printf("\t| ----------------------------------------------- |\n");
         printf("\t| [Botao 1] Jogar novamente                       |\n");
         printf("\t| [Botao 4] Sair                                  |\n");
@@ -73,6 +104,7 @@ int main() {
     char tabuleiro[3][3];
     char jogador, vencedor;
     int linha, coluna, jogadas, botoes;
+    int cont;
 
     exibirTela('m', ' ');
     scanf("%d",&botoes);
@@ -80,22 +112,39 @@ int main() {
     if (botoes==8) {
         do {
             system("clear");
-            inicializarTabuleiro(tabuleiro);
+            inicializarTabuleiro(&tabuleiro);
             jogadas = 0;
             jogador = 'X';
+            cont=1;
 
             do {
-                imprimirTabuleiro(&tabuleiro);
+                while(1){
+                    int escolha;
+                    printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
+                    imprimirTabuleiro(&tabuleiro);
+                    printf(">>> ");
+                    scanf("%d",&escolha);
+                    if(escolha == 1){
+                        if(cont==9)
+                            cont=1;
+                        else
+                            cont++;
 
-                printf("Jogador %c, informe a linha (1-3) e coluna (1-3) separados por espaco: ", jogador);
-                scanf("%d %d", &linha, &coluna);
-                linha--; // Ajustar para o índice 0
-                coluna--; // Ajustar para o índice 0
+                        system("clear");
+                    }
 
-                // Verificar se a posição está vazia
+                    else if(escolha == 0){
+                        break;
+                    }
+                }
+                
+                linha = qualLinha(cont);
+                coluna = qualColuna(cont);
+                //Verificar se a posição está vazia
                 if (tabuleiro[linha][coluna] == ' ') {
                     tabuleiro[linha][coluna] = jogador;
                     jogadas++;
+                    cont=1;
                     vencedor = verificarVencedor(&tabuleiro);
 
                     //Trocar de jogador
@@ -108,10 +157,10 @@ int main() {
                 else{
                     system("clear");
                     printf("\033[0;31m\t\tPosição ocupada. Tente novamente.\n\n\033[0m");
-                }
+                } 
 
             } while (vencedor==' ' && jogadas < 9);
-        
+
             //Tabuleiro final
             imprimirTabuleiro(&tabuleiro);;
 
