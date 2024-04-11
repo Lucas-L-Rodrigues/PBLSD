@@ -97,7 +97,7 @@ void exibirTela(char tipo, char vencedor) {
         printf("\t| [Botao 4] Sair                                  |\n");
     }
     
-    printf("\t|_________________________________________________|\n\n>>> ");
+    printf("\t|_________________________________________________|\n\n");
 }
 
 int main() {
@@ -122,7 +122,7 @@ int main() {
                     int escolha;
                     printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
                     imprimirTabuleiro(&tabuleiro);
-                    printf(">>> ");
+                    printf("\nPressione botão direito do mouse para selecionar quadrante\n");
                     scanf("%d",&escolha);
                     if(escolha == 1){
                         if(cont==9)
