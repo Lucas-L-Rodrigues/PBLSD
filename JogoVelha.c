@@ -15,6 +15,8 @@ int main() {
         return -1;
     }
 
+    system("clear");
+
     exibirTela('m', ' ');
     
     //Lê botões da placa
@@ -125,7 +127,7 @@ int main() {
         } while (botoes==8);
     }
     
-    printf("\nSaindo. Até a próxima!\n");
+    printf("\nSaindo. Até a próxima!\n\n");
 
     //Fecha conexão com os botões da placa
     KEY_close ( );
