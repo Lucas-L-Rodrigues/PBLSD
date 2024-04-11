@@ -121,3 +121,5 @@ void exibirTela(char tipo, char vencedor) {
     
     printf("\t|_________________________________________________|\n\n");
 }
+
+#endif  
