@@ -33,6 +33,34 @@ int main() {
     return 0;
 }*/
 
+
+
+/*#include <stdio.h>
+
+int main() {
+    FILE *file;
+    unsigned char buffer[16]; // Tamanho típico de uma linha no formato hexadecimal
+
+    // Abre o arquivo com o xxd usando a opção -E
+    file = popen("xxd -E -l 144 /dev/input/event12", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return 1;
+    }
+
+    // Lê e imprime continuamente as linhas do arquivo
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        printf("%s", buffer);
+    }
+
+    // Fecha o arquivo
+    pclose(file);
+
+    return 0;
+}*/
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
