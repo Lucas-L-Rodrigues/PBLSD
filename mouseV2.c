@@ -5,16 +5,16 @@
 int main() {
     FILE *fp;
 
-    // Abre o comando xxd -E -l 144 /dev/input/event12 em modo de leitura
-    fp = popen("xxd -E -l 144 /dev/input/event12", "r");
-    if (fp == NULL) {
-        printf("Erro ao abrir o comando.\n");
-        return 1;
-    }
-
     int cont1 = 0, cont2 = 0;
 
     while (1) {
+                // Abre o comando xxd -E -l 144 /dev/input/event12 em modo de leitura
+        fp = popen("xxd -E -l 144 /dev/input/event12", "r");
+        if (fp == NULL) {
+            printf("Erro ao abrir o comando.\n");
+            return 1;
+        }
+
         char buffer[256];
         while (fgets(buffer, sizeof(buffer), fp) != NULL) {
             if (strstr(buffer, "0400 0400 0200 0900") != NULL) {
@@ -37,9 +37,8 @@ int main() {
                     cont2=0;
             }
         }
+        pclose(fp);
     }
-
-    pclose(fp);
 
     return 0;
 }
