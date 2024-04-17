@@ -46,6 +46,10 @@ int main() {
 
                 break;
             }
+
+            //caso não seja uma linha desejada, limpa o buffer com a linha atual para não restar nenhum caractere para a proxima iteração ( nova linha )
+            //else
+                //memset(buffer, 0, sizeof(buffer));
         }
 
         pclose(fp);

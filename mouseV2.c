@@ -19,8 +19,8 @@ int main() {
         }
 
         char buffer[256];
-        //enquanto não ler todas as linhas
 
+        //enquanto não ler todas as linhas
         while (fgets(buffer, sizeof(buffer), fp) != NULL) {
             //caso strstr não retorne null ( tem o padrão )
             if (strstr(buffer, mouseDireito) != NULL) {
@@ -47,6 +47,10 @@ int main() {
 
                 break;
             }
+            
+            //caso não seja uma linha desejada, limpa o buffer com a linha atual para não restar nenhum caractere para a proxima iteração ( nova linha )
+            //else
+                //memset(buffer, 0, sizeof(buffer));
         }
 
         pclose(fp);
