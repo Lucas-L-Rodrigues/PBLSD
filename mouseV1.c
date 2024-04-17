@@ -21,7 +21,7 @@ int main() {
         char buffer[256];
         //enquanto não ler todas as linhas
         while (fgets(buffer, sizeof(buffer), fp) != NULL) {
-            //caso strstr não retorne null ( não tem o padrão )
+            //caso strstr não retorne null ( tem o padrão )
             if (strstr(buffer, mouseDireito) != NULL) {
                 if(cont1==0){
                     printf("Botão direito clicado!\n");
@@ -30,9 +30,11 @@ int main() {
                 
                 else
                     cont1=0;
+
+                break;
             }
 
-            //caso strstr não retorne null ( não tem o padrão )
+            //caso strstr não retorne null ( tem o padrão )
             else if (strstr(buffer, mouseEsquerdo) != NULL) {
                 if(cont2==0){
                     printf("Botão esquerdo clicado!\n");
@@ -41,6 +43,8 @@ int main() {
                 
                 else
                     cont2=0;
+
+                break;
             }
         }
 
