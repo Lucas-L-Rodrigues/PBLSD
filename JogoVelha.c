@@ -41,6 +41,7 @@ int main() {
                 FILE *fp;
                 char buffer[80];
                 int encerra = 0;
+                int cont1 = 0, cont2 = 0;
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 while (1) {
@@ -55,24 +56,36 @@ int main() {
                     while (fgets(buffer, sizeof(buffer), fp) != NULL) {
                         //caso strstr não retorne null ( tem o padrão )
                         if (strstr(buffer, mouseDireito) != NULL) {
-                            if(cont==9)
-                                cont=1;
+                            if(cont1==0){
+                                if(cont==9)
+                                    cont=1;
+                                else
+                                    cont++;
+                                
+                                system("clear");
+                                printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
+                                imprimirTabuleiro(&tabuleiro);
+                                printf("\nPressione botão direito do mouse para selecionar quadrante\n");
+                                memset(buffer, 0, sizeof(buffer));
+                                cont1++;
+                                break;
+                            }
+
                             else
-                                cont++;
-                            
-                            system("clear");
-                            printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
-                            imprimirTabuleiro(&tabuleiro);
-                            printf("\nPressione botão direito do mouse para selecionar quadrante\n");
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
+                                cont1=0;
                         }
 
                         //caso strstr não retorne null ( tem o padrão )
                         else if (strstr(buffer, mouseEsquerdo) != NULL) {
-                            encerra = 1;
-                            memset(buffer, 0, sizeof(buffer));     
-                            break;
+                            if(cont2==0){
+                                encerra = 1;
+                                memset(buffer, 0, sizeof(buffer));  
+                                cont2++;   
+                                break;
+                            }
+
+                            else
+                                cont2=0;
                         }
 
                         memset(buffer, 0, sizeof(buffer));
