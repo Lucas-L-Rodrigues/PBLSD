@@ -33,38 +33,28 @@ int main() {
             jogador = 'X';
             cont=1;
 
-            int fd;
-            struct input_event event;
-
-            //Abre arquivo do evento do mouse
-            fd = open("/dev/input/event0", O_RDONLY);
-            if (fd == -1) {
-                perror("Error opening mouse event file\n");
-                return 1;
-            }
-
             do {
                 printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
                 imprimirTabuleiro(&tabuleiro);
                 printf("\nPressione botão direito do mouse para selecionar quadrante\n");
 
+                FILE *fp;
+                char buffer[80];
+                int encerra = 0;
+
                 //Capta eventos do mouse até botão esquerdo ser pressionado
-                while(1){
-                    //Lê evento
-                    ssize_t bytes_read = read(fd, &event, sizeof(event));
-                    if (bytes_read == -1) {
-                        perror("Error reading mouse event");
-                        close(fd);
+                while (1) {
+                    //Abre o comando xxd -E -l 144 /dev/input/event12 em modo de leitura
+                    fp = popen("xxd -E -l 96 /dev/input/event0", "r");
+                    if (fp == NULL) {
+                        printf("Erro ao abrir o comando.\n");
                         return 1;
-                    } else if (bytes_read != sizeof(event)) {
-                        fprintf(stderr, "Incomplete event read\n");
-                        continue;
                     }
-                
-                    //Verifica se houve um botão do mouse pressionado, e se sim, qual botão foi usado
-                    if (event.type == 1 && (event.code == 272 || event.code == 273) && event.value == 1) {
-                        //Se for o botão direito
-                        if(event.code == 273){
+
+                    //enquanto não ler todas as linhas
+                    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+                        //caso strstr não retorne null ( tem o padrão )
+                        if (strstr(buffer, mouseDireito) != NULL) {
                             if(cont==9)
                                 cont=1;
                             else
@@ -74,12 +64,22 @@ int main() {
                             printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
                             imprimirTabuleiro(&tabuleiro);
                             printf("\nPressione botão direito do mouse para selecionar quadrante\n");
+                            memset(buffer, 0, sizeof(buffer));
+                            break;
                         }
 
-                        //Se for o botão esquerdo
-                        else if(event.code == 272)
+                        //caso strstr não retorne null ( tem o padrão )
+                        else if (strstr(buffer, mouseEsquerdo) != NULL) {
+                            encerra = 1;
+                            memset(buffer, 0, sizeof(buffer));     
                             break;
+                        }
+
+                        memset(buffer, 0, sizeof(buffer));
                     }
+                    pclose(fp);
+                    if(encerra==1)
+                        break;
                 }
 
                 //Relaciona o contador com linha e coluna do tabuleiro
@@ -107,9 +107,6 @@ int main() {
                     printf("\033[0;31m\t\tPosição ocupada. Tente novamente.\n\n\033[0m");
                 } 
             } while (vencedor==' ' && jogadas < 9);
-
-            //Fecha o arquivo do evento do mouse
-            close(fd);
 
             //Tabuleiro final
             imprimirTabuleiro(&tabuleiro);;
