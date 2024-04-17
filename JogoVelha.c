@@ -41,7 +41,7 @@ int main() {
                 FILE *fp;
                 char buffer[80];
                 int encerra = 0;
-                int cont1 = 0, cont2 = 0;
+                int cliqueDir = 0, cliqueEsq = 0;
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 while (1) {
@@ -56,7 +56,9 @@ int main() {
                     while (fgets(buffer, sizeof(buffer), fp) != NULL) {
                         //caso strstr não retorne null ( tem o padrão )
                         if (strstr(buffer, mouseDireito) != NULL) {
-                            if(cont1==0){
+                            if(cliqueDir==0){
+                                cliqueDir++;
+
                                 if(cont==9)
                                     cont=1;
                                 else
@@ -67,25 +69,24 @@ int main() {
                                 imprimirTabuleiro(&tabuleiro);
                                 printf("\nPressione botão direito do mouse para selecionar quadrante\n");
                                 memset(buffer, 0, sizeof(buffer));
-                                cont1++;
                                 break;
                             }
 
                             else
-                                cont1=0;
+                                cliqueDir=0;
                         }
 
                         //caso strstr não retorne null ( tem o padrão )
                         else if (strstr(buffer, mouseEsquerdo) != NULL) {
-                            if(cont2==0){
+                            if(cliqueEsq==0){
+                                cliqueEsq++;
                                 encerra = 1;
-                                memset(buffer, 0, sizeof(buffer));  
-                                cont2++;   
+                                memset(buffer, 0, sizeof(buffer));     
                                 break;
                             }
 
                             else
-                                cont2=0;
+                                cliqueEsq=0;
                         }
 
                         memset(buffer, 0, sizeof(buffer));
