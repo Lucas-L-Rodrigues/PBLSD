@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define mouseDireito "0400 0400 0200 0900"
+#define mouseEsquerdo "0400 0400 0100 0900"
+
 int main() {
     FILE *fp;
     char buffer[80];
