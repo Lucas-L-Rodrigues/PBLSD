@@ -2,23 +2,11 @@
 #define UTILS_H
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include <string.h>
 #include <intelfpgaup/KEY.h>
 
-//Estrutura para capitar tempo do evento do mouse
-struct timeval {
-    long tv_sec;  // segundos
-    long tv_usec; // microssegundos
-};
-
-//Estrutura que capita tempo, tipo, ação e acontecimento do evento do mouse
-struct input_event {
-    struct timeval time;
-    unsigned short type;
-    unsigned short code;
-    unsigned int value;
-};
+#define mouseDireito "0400 0400 0200 0900"
+#define mouseEsquerdo "0400 0400 0100 0900"
 
 //Função para relacionar valor do contador com a linha do tabuleiro (primeiro termo da matriz)
 int qualLinha(int cont) {
