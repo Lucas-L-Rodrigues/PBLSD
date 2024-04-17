@@ -5,6 +5,10 @@ int main() {
     char jogador, vencedor;
     int linha, coluna, jogadas, botoes;
     int cont;
+    FILE *fp;
+    char buffer[80];
+    int encerra;
+    int cliqueDir,cliqueEsq;
     
     //Limpa buffer
     KEY_close();
@@ -38,10 +42,10 @@ int main() {
                 imprimirTabuleiro(&tabuleiro);
                 printf("\nPressione botão direito do mouse para selecionar quadrante\n");
 
-                FILE *fp;
-                char buffer[80];
-                int encerra = 0;
-                int cliqueDir = 0, cliqueEsq = 0;
+                encerra = 0;
+                cliqueDir = 0;
+                cliqueEsq = 0;
+                memset(buffer, 0, sizeof(buffer));
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 while (1) {
