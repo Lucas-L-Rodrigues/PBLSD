@@ -11,14 +11,11 @@ int main() {
 
     while (1) {
         // Abre o comando xxd -E -l 48 /dev/input/event12 em modo de leitura
-        fp = popen("xxd -E -l 48 /dev/input/event12", "r");
+        fp = popen("xxd -E -l 48 /dev/input/event0", "r");
         if (fp == NULL) {
             printf("Erro ao abrir o comando.\n");
             return 1;
         }
-
-        //Testar removendo linha 10
-        //memset(buffer, 0, sizeof(buffer));
 
         // Lê e imprime a saída do comando
         while (fgets(buffer, sizeof(buffer), fp) != NULL) {
