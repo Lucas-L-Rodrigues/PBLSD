@@ -20,7 +20,7 @@ int main() {
     FILE *fp;
     
     //vetor que pega linha por linha de um evento do mouse
-    char buffer[80];
+    char buffer[70];
     
     //Subida e descida do clique direito e esquerdo do mouse e confirmação da jogada
     int cliqueDir, cliqueEsq, confirma;
@@ -51,15 +51,15 @@ int main() {
             jogadas = 0;
             jogador = 'X';
             quadrante = 1;
+            cliqueDir = 0;
+            cliqueEsq = 0;
 
             do {
                 printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, quadrante);
                 imprimirTabuleiro(&tabuleiro);
                 printf("\nPressione botão direito do mouse para selecionar quadrante\n");
-
                 confirma = 0;
-                cliqueDir = 0;
-                cliqueEsq = 0;
+                memset(buffer, 0, sizeof(buffer));
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 do {
@@ -70,9 +70,6 @@ int main() {
                         printf("Erro ao abrir o comando.\n");
                         return 1;
                     }
-
-                    //limpa buffer
-                    memset(buffer, 0, sizeof(buffer));
 
                     //enquanto não ler todas as linhas do evento ( 3 linhas ao total )
                     while (fgets(buffer, sizeof(buffer), fp) != NULL) {
@@ -111,9 +108,11 @@ int main() {
                             }
 
                             //soltei botão esquerdo do mouse
-                            else
+                            else{
                                 cliqueEsq=0;
-
+                                confirma = 0;
+                            }
+                            
                             //limpa buffer ( apaga linha já lida )
                             memset(buffer, 0, sizeof(buffer));
                             break;
