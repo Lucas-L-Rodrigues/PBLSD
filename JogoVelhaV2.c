@@ -58,6 +58,7 @@ int main() {
                 printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, quadrante);
                 imprimirTabuleiro(&tabuleiro);
                 printf("\nPressione botão direito do mouse para selecionar quadrante\n");
+
                 confirma = 0;
                 memset(buffer, 0, sizeof(buffer));
 
@@ -102,15 +103,13 @@ int main() {
                         //caso strstr não retorne null ( tem o padrão )
                         else if (strstr(buffer, mouseEsquerdo) != NULL) {
                             //pressionei botão esquerdo do mouse
-                            if(cliqueEsq==0){
-                                cliqueEsq++;
-                                confirma = 1;    
-                            }
+                            if(cliqueEsq==0)
+                                cliqueEsq++;   
 
                             //soltei botão esquerdo do mouse
                             else{
+                                confirma = 1;
                                 cliqueEsq=0;
-                                confirma = 0;
                             }
                             
                             //limpa buffer ( apaga linha já lida )
