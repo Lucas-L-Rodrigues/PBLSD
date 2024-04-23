@@ -6,8 +6,8 @@
 #include <intelfpgaup/KEY.h>
 
 //Padrões dos eventos do clique dos botões direito e esquerdo do mouse
-#define mouseDireito "0400 0400 0200 0900"
-#define mouseEsquerdo "0400 0400 0100 0900"
+#define mouseDireito "0400 0200 0900"
+#define mouseEsquerdo "0400 0100 0900"
 
 //Função para relacionar valor do contador com a linha do tabuleiro (primeiro termo da matriz)
 int qualLinha(int cont) {
