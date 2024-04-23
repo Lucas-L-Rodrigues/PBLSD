@@ -1,14 +1,29 @@
 #include "utils.h"
 
 int main() {
+    //matriz do tabuleiro
     char tabuleiro[3][3];
+    
+    //jogador da vez e jogador vencedor
     char jogador, vencedor;
-    int linha, coluna, jogadas, botoes;
-    int cont;
+    
+    //linha e coluna da matriz
+    int linha, coluna;
+    
+    //numero de jogadas e botoes 1 ou 4 da placa
+    int jogadas, botoes;
+    
+    //quadrante selecionado
+    int quadrante;
+    
+    //ponteiro para acesso ao arquivo de leitura do evento do mouse
     FILE *fp;
-    char buffer[80];
-    int encerra;
-    int cliqueDir,cliqueEsq;
+    
+    //vetor que pega linha por linha de um evento do mouse
+    char buffer[70];
+    
+    //Subida e descida do clique direito e esquerdo do mouse e confirmação da jogada
+    int cliqueDir, cliqueEsq, confirma;
     
     //Limpa buffer
     KEY_close();
@@ -35,84 +50,95 @@ int main() {
             inicializarTabuleiro(&tabuleiro);
             jogadas = 0;
             jogador = 'X';
-            cont=1;
+            quadrante = 1;
+            cliqueDir = 0;
+            cliqueEsq = 0;
 
             do {
-                printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
+                printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, quadrante);
                 imprimirTabuleiro(&tabuleiro);
                 printf("\nPressione botão direito do mouse para selecionar quadrante\n");
 
-                encerra = 0;
-                cliqueDir = 0;
-                cliqueEsq = 0;
+                confirma = 0;
                 memset(buffer, 0, sizeof(buffer));
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
-                while (1) {
-                    //Abre o comando xxd -E -l 144 /dev/input/event12 em modo de leitura
-                    fp = popen("xxd -E -l 96 /dev/input/event0", "r");
+                do {
+                    //Abre o comando xxd -E -l 48 /dev/input/event0 em modo de leitura
+                    //48 pois so precisa ler 3 linhas
+                    fp = popen("xxd -E -l 48 /dev/input/event0", "r");
                     if (fp == NULL) {
                         printf("Erro ao abrir o comando.\n");
                         return 1;
                     }
 
-                    //enquanto não ler todas as linhas
+                    //enquanto não ler todas as linhas do evento ( 3 linhas ao total )
                     while (fgets(buffer, sizeof(buffer), fp) != NULL) {
                         //caso strstr não retorne null ( tem o padrão )
                         if (strstr(buffer, mouseDireito) != NULL) {
+                            //pressionei botão direito do mouse
                             if(cliqueDir==0){
                                 cliqueDir++;
 
-                                if(cont==9)
-                                    cont=1;
+                                if(quadrante==9)
+                                    quadrante = 1;
                                 else
-                                    cont++;
+                                    quadrante++;
                                 
                                 system("clear");
-                                printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, cont);
+                                printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, quadrante);
                                 imprimirTabuleiro(&tabuleiro);
                                 printf("\nPressione botão direito do mouse para selecionar quadrante\n");
-                                memset(buffer, 0, sizeof(buffer));
-                                break;
                             }
 
+                            //soltei botão direito do mouse
                             else
-                                cliqueDir=0;
+                                cliqueDir = 0;
+                            
+                            //limpa buffer ( apaga linha já lida )
+                            memset(buffer, 0, sizeof(buffer));
+                            break;
                         }
 
                         //caso strstr não retorne null ( tem o padrão )
                         else if (strstr(buffer, mouseEsquerdo) != NULL) {
-                            if(cliqueEsq==0){
-                                cliqueEsq++;
-                                encerra = 1;
-                                memset(buffer, 0, sizeof(buffer));     
-                                break;
-                            }
+                            //pressionei botão esquerdo do mouse
+                            if(cliqueEsq==0)
+                                cliqueEsq++;   
 
-                            else
-                                cliqueEsq=0;
+                            //soltei botão esquerdo do mouse
+                            else{
+                                confirma = 1;
+                                cliqueEsq = 0;
+                            }
+                            
+                            //limpa buffer ( apaga linha já lida )
+                            memset(buffer, 0, sizeof(buffer));
+                            break;
                         }
 
+                        //limpa buffer ( apaga linha já lida )
                         memset(buffer, 0, sizeof(buffer));
                     }
+                    
+                    //fecha arquivo de captura dos eventos do mouse
                     pclose(fp);
-                    if(encerra==1)
-                        break;
-                }
 
-                //Relaciona o contador com linha e coluna do tabuleiro
-                linha = qualLinha(cont);
-                coluna = qualColuna(cont);
+                } while (confirma==0);
+
+                //Relaciona o contador ( quadrante selecionado ) com linha e coluna do tabuleiro
+                linha = qualLinha(quadrante);
+                coluna = qualColuna(quadrante);
                 
                 //Verifica se a posição está vazia
                 if (tabuleiro[linha][coluna] == ' ') {
                     tabuleiro[linha][coluna] = jogador;
                     jogadas++;
-                    cont=1;
+                    quadrante = 1;
                     //Verifica se já tem um vencedor
                     vencedor = verificarVencedor(&tabuleiro);
 
-                    //Troca de jogador
+                    //Troca de jogador se não houver vencedor
                     if(vencedor==' ')
                         jogador = (jogador == 'X') ? 'O' : 'X';
                     
@@ -127,7 +153,7 @@ int main() {
             } while (vencedor==' ' && jogadas < 9);
 
             //Tabuleiro final
-            imprimirTabuleiro(&tabuleiro);;
+            imprimirTabuleiro(&tabuleiro);
 
             if (vencedor != ' ') 
                 exibirTela('v', vencedor);

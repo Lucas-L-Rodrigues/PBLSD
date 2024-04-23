@@ -162,7 +162,7 @@ int main() {
             } while (vencedor==' ' && jogadas < 9);
 
             //Tabuleiro final
-            imprimirTabuleiro(&tabuleiro);;
+            imprimirTabuleiro(&tabuleiro);
 
             if (vencedor != ' ') 
                 exibirTela('v', vencedor);
