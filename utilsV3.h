@@ -113,10 +113,10 @@ void exibirTela(char tipo, char vencedor) {
     
     //inicio
     if (tipo == 'm') {
-        printf("\t|           "azul"Bem-vindo ao Jogo da Velha!           "padrao"|\n");
+        printf("\t|           "azulClaro"Bem-vindo ao Jogo da Velha!           "padrao"|\n");
         printf("\t| ----------------------------------------------- |\n");
-        printf("\t| "azul"[Botao 1] Iniciar jogo                          "padrao"|\n");
-        printf("\t| "azul"[Botao 4] Sair                                  "padrao"|\n");
+        printf("\t| "azulClaro"[Botao 1] Iniciar jogo                          "padrao"|\n");
+        printf("\t| "azulClaro"[Botao 4] Sair                                  "padrao"|\n");
         printf("\t");
      } 
 
@@ -124,16 +124,16 @@ void exibirTela(char tipo, char vencedor) {
     else if (tipo == 'v') {
         printf("|              "verde"O jogador %c venceu!"padrao"                |\n", vencedor);
         printf("| ----------------------------------------------- |\n");
-        printf("| "azul"[Botao 1] Jogar novamente                       "padrao"|\n");
-        printf("| "azul"[Botao 4] Sair                                  "padrao"|\n");
+        printf("| "azulClaro"[Botao 1] Jogar novamente                       "padrao"|\n");
+        printf("| "azulClaro"[Botao 4] Sair                                  "padrao"|\n");
     } 
 
     //empate
     else if (tipo == 'e') {
         printf("|                 "vermelho"O jogo empatou."padrao"                 |\n");
         printf("| ----------------------------------------------- |\n");
-        printf("| "azul"[Botao 1] Jogar novamente                       "padrao"|\n");
-        printf("| "azul"[Botao 4] Sair                                  "padrao"|\n");
+        printf("| "azulClaro"[Botao 1] Jogar novamente                       "padrao"|\n");
+        printf("| "azulClaro"[Botao 4] Sair                                  "padrao"|\n");
     }
     
     printf("|_________________________________________________|"padrao"\n\n");

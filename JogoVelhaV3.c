@@ -55,9 +55,9 @@ int main() {
             cliqueEsq = 0;
 
             do {
-                printf(azul"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
+                printf(azulClaro"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
                 imprimirTabuleiro(&tabuleiro,1);
-                printf(azul"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
+                printf(azulClaro"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
 
                 confirma = 0;
                 memset(buffer, 0, sizeof(buffer));
@@ -86,9 +86,9 @@ int main() {
                                     quadrante++;
                                 
                                 system("clear");
-                                printf(azul"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
+                                printf(azulClaro"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
                                 imprimirTabuleiro(&tabuleiro,1);
-                                printf(azul"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
+                                printf(azulClaro"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
                             }
 
                             //soltei botão direito do mouse
