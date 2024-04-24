@@ -55,9 +55,9 @@ int main() {
             cliqueEsq = 0;
 
             do {
-                printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, quadrante);
+                printf(azul"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
                 imprimirTabuleiro(&tabuleiro,1);
-                printf("\nPressione botão direito do mouse para selecionar quadrante\n");
+                printf(azul"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
 
                 confirma = 0;
                 memset(buffer, 0, sizeof(buffer));
@@ -86,9 +86,9 @@ int main() {
                                     quadrante++;
                                 
                                 system("clear");
-                                printf("\033[0;32m\t\tJogador %c - Quadrante selecionado: %d\n\n\033[0m",jogador, quadrante);
+                                printf(azul"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
                                 imprimirTabuleiro(&tabuleiro,1);
-                                printf("\nPressione botão direito do mouse para selecionar quadrante\n");
+                                printf(azul"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
                             }
 
                             //soltei botão direito do mouse
@@ -148,7 +148,7 @@ int main() {
                 //Posição já está marcada
                 else{
                     system("clear");
-                    printf("\033[0;31m\t\tPosição ocupada. Tente novamente.\n\n\033[0m");
+                    printf(vermelho"\t\tPosição ocupada. Tente novamente."padrao"\n\n");
                 } 
             } while (vencedor==' ' && jogadas < 9);
 
