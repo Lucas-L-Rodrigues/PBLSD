@@ -9,6 +9,13 @@
 #define mouseDireito "0400 0200 0900"
 #define mouseEsquerdo "0400 0100 0900"
 
+#define padrao "\033[0m"
+
+#define vermelho "\033[1;31m"
+#define verde "\033[1;32m"
+#define azul "\033[1;34m"
+#define azulClaro "\033[1;36m" 
+
 //Função para relacionar valor do contador com a linha do tabuleiro (primeiro termo da matriz)
 int qualLinha(int cont) {
     int linha;
@@ -106,30 +113,30 @@ void exibirTela(char tipo, char vencedor) {
     
     //inicio
     if (tipo == 'm') {
-        printf("\t|           Bem-vindo ao Jogo da Velha!           |\n");
+        printf("\t|           "azul"Bem-vindo ao Jogo da Velha!           "padrao"|\n");
         printf("\t| ----------------------------------------------- |\n");
-        printf("\t| [Botao 1] Iniciar jogo                          |\n");
-        printf("\t| [Botao 4] Sair                                  |\n");
+        printf("\t| "azul"[Botao 1] Iniciar jogo                          "padrao"|\n");
+        printf("\t| "azul"[Botao 4] Sair                                  "padrao"|\n");
         printf("\t");
      } 
 
     //vitória
     else if (tipo == 'v') {
-        printf("|              \033[0;32mO jogador %c venceu!\033[0m                |\n", vencedor);
+        printf("|              "verde"O jogador %c venceu!"padrao"                |\n", vencedor);
         printf("| ----------------------------------------------- |\n");
-        printf("| [Botao 1] Jogar novamente                       |\n");
-        printf("| [Botao 4] Sair                                  |\n");
+        printf("| "azul"[Botao 1] Jogar novamente                       "padrao"|\n");
+        printf("| "azul"[Botao 4] Sair                                  "padrao"|\n");
     } 
 
     //empate
     else if (tipo == 'e') {
-        printf("|                 \033[0;31mO jogo empatou.\033[0m                 |\n");
+        printf("|                 "vermelho"O jogo empatou."padrao"                 |\n");
         printf("| ----------------------------------------------- |\n");
-        printf("| [Botao 1] Jogar novamente                       |\n");
-        printf("| [Botao 4] Sair                                  |\n");
+        printf("| "azul"[Botao 1] Jogar novamente                       "padrao"|\n");
+        printf("| "azul"[Botao 4] Sair                                  "padrao"|\n");
     }
     
-    printf("|_________________________________________________|\n\n");
+    printf("|_________________________________________________|"padrao"\n\n");
 }
 
 #endif
