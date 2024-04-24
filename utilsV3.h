@@ -98,7 +98,11 @@ char verificarVencedor(char (*tabuleiro)[3][3]) {
 
 //Função para exibição de menus
 void exibirTela(char tipo, char vencedor) {
-    printf("\t _________________________________________________ \n");
+   
+    if(tipo == 'm')
+	    printf("\t");
+   
+    printf(" _________________________________________________ \n");
     
     //inicio
     if (tipo == 'm') {
@@ -106,25 +110,26 @@ void exibirTela(char tipo, char vencedor) {
         printf("\t| ----------------------------------------------- |\n");
         printf("\t| [Botao 1] Iniciar jogo                          |\n");
         printf("\t| [Botao 4] Sair                                  |\n");
-    } 
+        printf("\t");
+     } 
 
     //vitória
     else if (tipo == 'v') {
-        printf("\t|              \033[0;32mO jogador %c venceu!\033[0m                |\n", vencedor);
-        printf("\t| ----------------------------------------------- |\n");
-        printf("\t| [Botao 1] Jogar novamente                       |\n");
-        printf("\t| [Botao 4] Sair                                  |\n");
+        printf("|              \033[0;32mO jogador %c venceu!\033[0m                |\n", vencedor);
+        printf("| ----------------------------------------------- |\n");
+        printf("| [Botao 1] Jogar novamente                       |\n");
+        printf("| [Botao 4] Sair                                  |\n");
     } 
 
     //empate
     else if (tipo == 'e') {
-        printf("\t|                 \033[0;31mO jogo empatou.\033[0m                 |\n");
-        printf("\t| ----------------------------------------------- |\n");
-        printf("\t| [Botao 1] Jogar novamente                       |\n");
-        printf("\t| [Botao 4] Sair                                  |\n");
+        printf("|                 \033[0;31mO jogo empatou.\033[0m                 |\n");
+        printf("| ----------------------------------------------- |\n");
+        printf("| [Botao 1] Jogar novamente                       |\n");
+        printf("| [Botao 4] Sair                                  |\n");
     }
     
-    printf("\t|_________________________________________________|\n\n");
+    printf("|_________________________________________________|\n\n");
 }
 
-#endif  
+#endif
