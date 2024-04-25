@@ -10,10 +10,8 @@
 #define mouseEsquerdo "0400 0100 0900"
 
 #define padrao "\033[0m"
-
 #define vermelho "\033[1;31m"
 #define verde "\033[1;32m"
-#define azul "\033[1;34m"
 #define azulClaro "\033[1;36m" 
 
 //Função para relacionar valor do contador com a linha do tabuleiro (primeiro termo da matriz)
@@ -82,7 +80,7 @@ void imprimirTabuleiro(char (*tabuleiro)[3][3], int matrizEspelho) {
     printf("\n");
 }
 
-// Função para imprimir o quadrante selecionado
+//Função para imprimir o quadrante selecionado
 void imprimirQuadrante(char *jogador, int *quadrante, char (*tabuleiro)[3][3]) {
     printf(azulClaro"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",*jogador, *quadrante);
     imprimirTabuleiro(tabuleiro,1);
