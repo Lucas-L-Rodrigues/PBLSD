@@ -38,10 +38,9 @@ int main() {
                     if (tempCima == sensibilidade){
                         contador -= 3;
                         zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
+                        printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                printf("o valor do contador eh: %d \n", contador);
 
                 memset(buffer, 0, sizeof(buffer));
                 break;
@@ -55,10 +54,9 @@ int main() {
                     if (tempBaixo == sensibilidade){
                         contador += 3;
                         zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
+                        printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                printf("o valor do contador eh: %d \n", contador);
 
                 memset(buffer, 0, sizeof(buffer));
                 break;
@@ -72,10 +70,9 @@ int main() {
                     if (tempEsquerda == sensibilidade){
                         contador -= 1;
                         zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
+                        printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                printf("o valor do contador eh: %d \n", contador);
 
                 memset(buffer, 0, sizeof(buffer));
                 break;
@@ -83,15 +80,15 @@ int main() {
 
             else if (strstr(buffer, "0200 0000 0100") != NULL) {
                 printf("DIREITA\n\n");
+                
                 if ((contador != 3) && (contador != 6) && (contador != 9)) {
                     tempDireita += 1;
                     if (tempDireita == sensibilidade){
                         contador += 1;
                         zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
+                        printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                printf("o valor do contador eh: %d \n", contador);
 
                 memset(buffer, 0, sizeof(buffer));
                 break;

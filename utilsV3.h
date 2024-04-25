@@ -82,6 +82,13 @@ void imprimirTabuleiro(char (*tabuleiro)[3][3], int matrizEspelho) {
     printf("\n");
 }
 
+// Função para imprimir o quadrante selecionado
+void imprimirQuadrante(char *jogador, int *quadrante, char (*tabuleiro)[3][3]) {
+    printf(azulClaro"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",*jogador, *quadrante);
+    imprimirTabuleiro(tabuleiro,1);
+    printf(azulClaro"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
+}
+
 //Função para verificar se há um vencedor e retornar simbolo ( X ou O )
 char verificarVencedor(char (*tabuleiro)[3][3]) {
     //Verificar linhas e colunas
