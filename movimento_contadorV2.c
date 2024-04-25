@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define sensibilidade 20
+#define sensibilidade 15
 
 void zeraTemp(int *tempCima, int *tempBaixo, int *tempEsquerda, int *tempDireita){
     *tempCima = 0;
