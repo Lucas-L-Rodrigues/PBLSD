@@ -45,21 +45,16 @@ int main() {
 
     //Botão 1 pressionado
     if (botoes==8) {
-        do {
+        cliqueDir = 0;
+        cliqueEsq = 0;
+	 do {
             system("clear");
             inicializarTabuleiro(&tabuleiro);
             jogadas = 0;
             jogador = 'X';
             quadrante = 1;
-            cliqueDir = 0;
-            cliqueEsq = 0;
-
             do {
-                printf(azulClaro"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
-                imprimirTabuleiro(&tabuleiro,1);
-                printf(azulClaro"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
-
-                //imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
+                imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
 
                 confirma = 0;
                 memset(buffer, 0, sizeof(buffer));
@@ -88,12 +83,7 @@ int main() {
                                     quadrante++;
                                 
                                 system("clear");
-                                
-                                printf(azulClaro"\t\tJogador %c - Quadrante selecionado: %d"padrao"\n\n",jogador, quadrante);
-                                imprimirTabuleiro(&tabuleiro,1);
-                                printf(azulClaro"\nPressione botão direito do mouse para selecionar quadrante"padrao"\n");
-
-                                //imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
+                                imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                             }
 
                             //soltei botão direito do mouse
