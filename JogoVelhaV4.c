@@ -80,7 +80,7 @@ int main() {
                             //pressionei botão esquerdo do mouse
                             if(cliqueEsq==0){
                                 confirma = 1;
-                                cliqueEsq++  
+                                cliqueEsq++;
                             } 
 
                             //soltei botão esquerdo do mouse
@@ -145,7 +145,7 @@ int main() {
                             if ((quadrante != 3) && (quadrante != 6) && (quadrante != 9)) {
                                 tempDireita += 1;
                                 if (tempDireita == sensibilidade){
-                                    quadrante -= 3;
+                                    quadrante += 1;
                                     zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
                                     system("clear");
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
@@ -220,3 +220,4 @@ int main() {
 
     return 0;
 }
+
