@@ -57,9 +57,10 @@ int main() {
             jogadas = 0;
             jogador = 'X';
             quadrante = 1;
+	    confirma = 0;
+
             do {
                 imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
-
                 confirma = 0;
                 memset(buffer, 0, sizeof(buffer));
 
@@ -220,4 +221,3 @@ int main() {
 
     return 0;
 }
-
