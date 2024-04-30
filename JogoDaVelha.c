@@ -1,4 +1,4 @@
-#include "utilsV4.h"
+#include "utils.h"
 
 int main() {
     //Matriz do tabuleiro
@@ -57,12 +57,12 @@ int main() {
             jogadas = 0;
             jogador = 'X';
             quadrante = 1;
-	    confirma = 0;
 
             do {
-                imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                 confirma = 0;
                 memset(buffer, 0, sizeof(buffer));
+                
+                imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 do {
@@ -165,7 +165,7 @@ int main() {
                     pclose(fp);
                 
                 //Enquanto não for clicado botão esquerdo do mouse
-                } while (confirma==0);
+                } while (confirma == 0);
 
                 //Relaciona o contador ( quadrante selecionado ) com linha e coluna do tabuleiro
                 linha = qualLinha(quadrante);
@@ -211,7 +211,7 @@ int main() {
             while (botoes!=8 && botoes!=1)
                 KEY_read (&botoes);
         //Enquanto primeiro botão for pressionado
-        } while (botoes==8);
+        } while (botoes == 8);
     }
     
     printf("\nSaindo. Até a próxima!\n\n");

@@ -1,5 +1,5 @@
-#ifndef UTILSV3_H
-#define UTILSV3_H
+#ifndef UTILSCLIQUESMOUSE_H
+#define UTILSCLIQUESMOUSE_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
