@@ -29,5 +29,9 @@ run: $(PROG)
 	sudo ./$(PROG)
 
 # Regra para limpar os arquivos gerados
-clean:
+clearGerados:
 	rm -f $(PROG) $(OBJS)
+
+# Regra para limpar todos os arquivos
+clearAll:
+	rm -f $(PROG) $(OBJS) $(SRCS)
