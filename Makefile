@@ -4,6 +4,9 @@ PROG = programa
 # Lista de arquivos de código fonte
 SRCS = $(wildcard *.c)
 
+# Lista de arquivos de cabeçalho
+CABS = $(wildcard *.h)
+
 # Lista de arquivos de objeto
 OBJS = $(SRCS:.c=.o)
 
@@ -18,20 +21,19 @@ all: $(PROG)
 
 # Regras de compilação para cada arquivo
 %.o: %.c $(wildcard *.h)
-	$(CC) $(CFLAGS) -c $< -o $@
+        $(CC) $(CFLAGS) -c $< -o $@
 
 # Regra para o arquivo executável
 $(PROG): $(OBJS)
-	$(CC) $(OBJS) -o $(PROG)  $(CFLAGS) 
+        $(CC) $(OBJS) -o $(PROG)  $(CFLAGS)
 
 # Regra para executar o programa
 run: $(PROG)
-	sudo ./$(PROG)
+        sudo ./$(PROG)
 
 # Regra para limpar os arquivos gerados
 clearGerados:
-	rm -f $(PROG) $(OBJS)
+        rm -f $(PROG) $(OBJS)
 
-# Regra para limpar todos os arquivos
 clearAll:
-	rm -f $(PROG) $(OBJS) $(SRCS)
+        rm -f $(PROG) $(OBJS) $(SRCS) $(CABS)
