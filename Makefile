@@ -35,5 +35,6 @@ run: $(PROG)
 clearGerados:
         rm -f $(PROG) $(OBJS)
 
+# Regra para limpar todos os arquivos menos Makefile
 clearAll:
         rm -f $(PROG) $(OBJS) $(SRCS) $(CABS)
