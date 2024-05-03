@@ -60,6 +60,8 @@ int main() {
 
             do {
                 confirma = 0;
+
+                //Inicia vetor buffer
                 memset(buffer, 0, sizeof(buffer));
                 
                 imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
@@ -105,6 +107,7 @@ int main() {
                                 }
                             }
 
+                            //limpa buffer ( apaga linha já lida )
                             memset(buffer, 0, sizeof(buffer));
                             break;
                         }
@@ -121,6 +124,7 @@ int main() {
                                 }
                             }
 
+                            //limpa buffer ( apaga linha já lida )
                             memset(buffer, 0, sizeof(buffer));
                             break;
                         }
@@ -137,6 +141,7 @@ int main() {
                                 }
                             }
 
+                            //limpa buffer ( apaga linha já lida )
                             memset(buffer, 0, sizeof(buffer));
                             break;
                         }
@@ -153,6 +158,7 @@ int main() {
                                 }
                             }
 
+                            //limpa buffer ( apaga linha já lida )
                             memset(buffer, 0, sizeof(buffer));
                             break;
                         }
@@ -181,7 +187,7 @@ int main() {
                     vencedor = verificarVencedor(&tabuleiro);
 
                     //Troca de jogador se não houver vencedor
-                    if(vencedor==' ')
+                    if(vencedor == ' ')
                         jogador = (jogador == 'X') ? 'O' : 'X';
                     
                     system("clear");
