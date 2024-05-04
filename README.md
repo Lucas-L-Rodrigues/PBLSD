@@ -37,25 +37,45 @@ O controle do jogo (iniciar, pausar, resetar, etc...), pode ser feito a partir d
 </ul>
 
 <h1 align="center"> Sumário </h1>
+      <ul>
+        <li><a href="#equipamentos"> Equipamentos e Software Utilizados</a></li>
+      </ul>
 
 <div id="equipamentos">
 <h2> Equipamentos e Software Utilizados</h2>
 <div align="justify">
 
-
 Nesta seção, serão descritos os equipamentos e softwares utilizados para o desenvolvimento do projeto
-
 
 <h3> Kit de desenvolvimento DE1-SoC</h3>
 
-
 O kit de desenvolvimento DE1-SOC é construído em torno do Altera FPGA System-on-Chip (SoC), apresentando uma plataforma robusta de design de hardware que combina a lógica programável  do Intel FPGA Cyclone V com o processador  ARM cortex-A9.
 
+<p align="center">
+  <img src="VideosFotos/DE1-SOC.png" width = "400" />
+</p>
+<p align="center"><strong>Kit de desenvolvimento DE1-SoC</strong></p>
+
+<h3> Mouse</h3>
+
+<h3> Linguagem C</h3>
+
+A linguagem de programação C oi utilizada para o desenvolvimento completo do projeto, ela possui uma alta eficiência de memória e desempenho, o que permite um controle preciso dos recursos do hardware, além de possuir uma fácil portabilidade e um baixo nível de abstração.
+
+<h3> Compilador GNU</h3>
+
+O GCC (Gnu Compiler Collection), foi utilizado na compilação do código do jogo, possui uma alta portabilidade para as mais diversas plataormas e sistemas operacionais, além de possibilitar diversas otimizações que tornam o projeto mais eficiente.
+
+</div>
+</div>
+
+<div id="arq_CPU"> 
+<h2> Arquitetura da placa DE1-SoC</h2>
+<div align="justify">
 
 <div id="execucaoProjeto"> 
 <h2> Execução do Projeto  </h2>
 <div align="justify">
-
 
 Para iniciar o jogo, é necessário seguir os seguintes passos para obter o código-fonte, compilar o código em C e executá-lo em um dispositivo FPGA DE1-SoC. 
 
@@ -91,3 +111,6 @@ Para apagar todos os arquivos, com exceção do Makefile, use o comando:
 
 
     make clearAll
+
+</div>
+</div>
