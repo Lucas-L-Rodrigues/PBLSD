@@ -22,7 +22,7 @@ O controle do jogo (iníciar, pausar, resetar, etc...), pode ser feito a partir 
 
 <h2>  Equipe: <br></h2>
 <uL> 
-  <li><a href="https://github.com/LucaasGy">Lucas Gabriel</a></li>
+  <li><a href="https://github.com/LucaasGy">Lucas Gabriel Cerqueira Santos Lima</a></li>
   <li><a href="https://github.com/Lucas-L-Rodrigues">Lucas Lima Rodrigues</a></li>
   <li><a href="https://github.com/felipe-py">Luis Felipe Cunha Silva</a></li>
 </ul>
