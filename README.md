@@ -3,11 +3,11 @@
 
 <div align="justify"> 
 <div id="especificacoes-do-projeto"> 
-<h2> Especificações do Projeto:</h2>
+<h2> Especificações do Projeto</h2>
 
 O mercado de jogos movimenta bilhões anualmente, e continua sendo uma força altamente impulsionadora da economia global. Cada vez mais é observada uma alta demanda por experiências imersirvas e inovadoras, que buscam cativar o público com um alto nível de tecnologia, entretanto, ainda é possível observar uma demanda pelos jogos clássicos.
 
-Neste cenário, o clássico jogo da velha surge como um exemplo que resistiu ao tempo e continua marcando gerações. O presente projeto tem como intuito desenvolver um console que implemente uma clássica versão do atemporal jogo da velha, o jogo deve ser executado em uma interface em modo texto utilizando os recursos da placa de desenvolvimento DE1-SOC.
+Neste cenário, o clássico jogo da velha surge como um exemplo que resistiu ao tempo e continua marcando gerações. O presente projeto tem como intuito desenvolver um console que implemente uma clássica versão do atemporal jogo da velha, onde o mesmo, deve ser executado em uma interface em modo texto utilizando os recursos da placa de desenvolvimento DE1-SOC.
 
 Os requisitos para elaboração do projeto estão descritos a seguir:
 
@@ -16,7 +16,7 @@ Os requisitos para elaboração do projeto estão descritos a seguir:
 *  O código deve ser escrito em linguagem C
 *  O sistema só poderá utilizar os componentes disponíveis na placa.
 
-O controle do jogo (iníciar, pausar, resetar, etc...), pode ser feito a partir dos botões e chaves da placa, o display de 7 segmentos e os leds também podem ser utilizados para exibição de qualquer informação, se nencessário.
+O controle do jogo (iniciar, pausar, resetar, etc...), pode ser feito a partir dos botões e chaves da placa, o display de 7 segmentos e os leds também podem ser utilizados para exibição de qualquer informação, se necessário.
 
 </div>
 
@@ -28,14 +28,3 @@ O controle do jogo (iníciar, pausar, resetar, etc...), pode ser feito a partir 
 </ul>
 
 <h1 align="center"> Sumário </h1>
-
-<div id="equipamentos"> 
-<h2> Equipamentos e Software Utilizados</h2>
-<div align="justify"> 
-
-Nesta seção, serão descritos os equipamentos e softwares utilizados para o desenvolvimento do projeto
-
-<h3> Kit de desenvolvimento DE1-SoC</h3>
-
-O kit de desenvolvimento DE1-SOC é construído em torno do Altera FPGA System-on-Chip (SoC), apresentando uma plataforma robusta de design de hardware que combina a lógica programável  do Intel FPGA Cyclone V com o processador  ARM cortex-A9.
-A placa é equipada com uma memória DDR3, suporte pa vídeo e aúdio, Ethernet, entradas USB e diversos outros periéricos que podem auxiliar no desenvolvimento dos mais diversos projetos
