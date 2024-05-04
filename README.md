@@ -28,3 +28,14 @@ O controle do jogo (iníciar, pausar, resetar, etc...), pode ser feito a partir 
 </ul>
 
 <h1 align="center"> Sumário </h1>
+
+<div id="equipamentos"> 
+<h2> Equipamentos e Software Utilizados</h2>
+<div align="justify"> 
+
+Nesta seção, serão descritos os equipamentos e softwares utilizados para o desenvolvimento do projeto
+
+<h3> Kit de desenvolvimento DE1-SoC</h3>
+
+O kit de desenvolvimento DE1-SOC é construído em torno do Altera FPGA System-on-Chip (SoC), apresentando uma plataforma robusta de design de hardware que combina a lógica programável  do Intel FPGA Cyclone V com o processador  ARM cortex-A9.
+A placa é equipada com uma memória DDR3, suporte pa vídeo e aúdio, Ethernet, entradas USB e diversos outros periéricos que podem auxiliar no desenvolvimento dos mais diversos projetos
