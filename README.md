@@ -35,7 +35,7 @@ Nesta seção, são apresentados os equipamentos e software utilizados durante o
 
 <h3> O kit de desenvolvimento DE1-SoC</h3>
 
-A placa DE1-SoC é um kit de desenvolvimento que combina um processador ARM Cortex-A9 dual-core com um FPGA Cyclone V da Intel. Essa placa oferece uma ampla gama de periféricos, incluindo porta VGA, porta Ethernet, USB, porta de áudio, entre outros, o que a torna ideal para projetos que envolvem tanto software quanto hardware. Ela é frequentemente utilizada em ambientes educacionais e de pesquisa para o desenvolvimento e aprendizado em sistemas embarcados e FPGA.
+A placa DE1-SoC é um kit de desenvolvimento que integra um processador ARM Cortex-A9 dual-core com um FPGA Cyclone V da Intel. Este dispositivo oferece uma variedade de periféricos, como display de 7 segmentos, porta Ethernet, USB, porta de áudio, entre outros, tornando-o adequado para projetos que exigem integração de software e hardware. É comumente empregado em ambientes educacionais e de pesquisa para o estudo e desenvolvimento em sistemas embarcados e FPGA
 
 <p align="center">
   <img src="Images/DE1-SoC_top45_01.jpg" width = "400" />
@@ -53,15 +53,15 @@ PRECISA ATUALIZAR.
 
 <h3> Linguagem C</h3>
 
-A linguagem C foi escolhida devido à sua eficiência, portabilidade e ampla utilização em sistemas embarcados. Sua sintaxe simples permite controle preciso sobre o hardware, enquanto suas bibliotecas padrão e ferramentas facilitam o desenvolvimento de código compacto e otimizado para dispositivos com recursos limitados.
+A seleção da linguagem C foi motivada por sua eficiência, portabilidade e ampla adoção em sistemas embarcados. Sua sintaxe direta proporciona um controle preciso sobre o hardware, ao passo que suas bibliotecas padrão e ferramentas simplificam o desenvolvimento de código compacto e otimizado para dispositivos com recursos limitados.
 
 <h3> Compilador GNU</h3>
 
-O GCC, abreviação para "GNU Compiler Collection" (Coleção de Compiladores GNU), é uma distribuição integrada de compiladores amplamente utilizada que suporta várias linguagens de programação, incluindo C, C++, Objective-C, Fortran, Ada, entre outras. Ao ser invocado, o GCC passa por etapas de pré-processamento, compilação, montagem e ligação. Oferece uma ampla gama de opções de linha de comando para personalização, facilitando a configuração de acordo com as necessidades específicas do desenvolvedor.
+O GCC, que significa "GNU Compiler Collection" (Coleção de Compiladores GNU), é uma distribuição integrada de compiladores amplamente adotada que suporta diversas linguagens de programação, como C, C++, Objective-C, Fortran, Ada, entre outras. Ao ser executado, o GCC atravessa etapas de pré-processamento, compilação, montagem e ligação. Ele disponibiliza uma vasta variedade de opções de linha de comando para personalização, o que simplifica a configuração de acordo com as necessidades específicas do desenvolvedor.
 
 <h3>Vscode</h3>
 
-O Visual Studio Code, conhecido como VSCode, é um ambiente de desenvolvimento amplamente usado. Desenvolvido pela Microsoft, é um editor de código gratuito e de código aberto com recursos como realce de sintaxe, conclusão de código e depuração integrada. Suporta várias linguagens e possui extensões para personalização. No projeto ele foi utilizado para desenvolver o código fonte do jogo.
+O Visual Studio Code, também conhecido como VSCode, é um ambiente de desenvolvimento muito popular. Desenvolvido pela Microsoft, é um editor de código aberto e gratuito que oferece recursos como realce de sintaxe, conclusão automática de código e depuração integrada. Ele suporta uma variedade de linguagens de programação e possui um sistema de extensões que permite personalizar e estender suas funcionalidades. No projeto, o VSCode foi utilizado para desenvolver o código-fonte do jogo e formatar o README.
 
 </div>
 </div>
@@ -74,7 +74,7 @@ Nesta seção, será explorado a arquitetura da placa DE1-SoC, incluindo o proce
 
 <h3>Visão Geral dos Recursos do Processador ARM Cortex-A9 </h3>
 
-O processador ARM Cortex-A9 utiliza uma arquitetura de conjunto de instruções reduzido (RISC), onde as operações aritméticas e lógicas são realizadas nos registradores de uso geral. Os dados são movidos entre memória e registradores através de instruções Load e Store, com um comprimento de palavra de 32 bits e endereços de bytes em um estilo little-endian.
+O processador ARM Cortex-A9 utiliza uma arquitetura de conjunto de instruções reduzido (RISC), com operações aritméticas e lógicas realizadas nos seus registradores de uso geral. O movimento de dados entre a memória e os registradores é feito por instruções Load e Store, utilizando uma palavra de 32 bits e endereçamento de bytes no formato little-endian.
 
 <h3>Estrutura do Registro</h3>
 
@@ -87,16 +87,15 @@ O processador ARM Cortex-A9 possui 15 registros de uso geral (R0 a R14), um cont
 
 <h3>Instruções e Conjunto Thumb</h3>
 
-As instruções têm 32 bits e são armazenadas na memória alinhadas por palavras. O conjunto Thumb oferece uma versão menor com instruções de 16 bits, resultando em requisitos menores de memória, úteis em aplicativos incorporados.
+As instruções têm 32 bits e são armazenadas na memória alinhadas em palavras. O conjunto Thumb oferece uma versão compacta com instruções de 16 bits, reduzindo os requisitos de memória, o que é vantajoso em aplicações embarcadas.
 
 <h3>Memória</h3>
 
-O HPS inclui uma porta de memória que conecta o ARM MPCORE a uma memória DDR3 de 1 GB. Esta memória é normalmente utilizada como local de armazenamento de programas e dados pelos processadores ARM. A memória é organizada em 256M x 32 bits e pode ser acessada por meio de acessos de palavras (32 bits), meias palavras e bytes.
+O HPS inclui uma interface de memória que conecta o ARM MPCORE a uma memória DDR3 de 1 GB. Essa memória é comumente utilizada para armazenamento de programas e dados pelos processadores ARM. A memória é organizada em 256M x 32 bits e pode ser acessada por operações de palavra (32 bits), meia-palavra e byte.
 
 <h3>Mapeamento de Dispositivos de E/S</h3>
 
-Os dispositivos de entrada/saída acessíveis pelo processador ARM são mapeados na memória e podem ser acessados como locais de memória, utilizando instruções Load e Store.
-
+Os dispositivos de entrada/saída acessíveis pelo processador ARM são mapeados na memória e podem ser acessados como locais de memória através de instruções Load e Store.
 
 <h3>Interrupções de Hardware</h3>
 
@@ -104,7 +103,7 @@ As interrupções de hardware podem ser geradas por dispositivos de E/S, ativand
 
 <h3>Diagrama de Blocos do Sistema DE1-SoC</h3>
 
-O sistema DE1-SoC é composto pelo Hard Processor System (HPS) e FPGA dentro do chip Cyclone V SoC. O HPS inclui um processador dual-core ARM Cortex-A9, uma porta de memória DDR3 e dispositivos periféricos. O FPGA implementa dois processadores Intel Nios II e várias portas periféricas.
+O sistema DE1-SoC é composto pelo Hard Processor System (HPS) e FPGA dentro do chip Cyclone V SoC. O HPS inclui um processador dual-core ARM Cortex-A9, uma porta de memória DDR3 e dispositivos periféricos. O FPGA implementa dois processadores Intel Nios II e diversas portas periféricas.
 
 
 <p align="center">
@@ -115,11 +114,11 @@ O sistema DE1-SoC é composto pelo Hard Processor System (HPS) e FPGA dentro do 
 
 <h3>Comunicação entre Processador e FPGA via JTAG</h3>
 
-A porta JTAG implementa um link de comunicação entre a placa DE1-SoC e seu computador host, permitindo a transferência de arquivos de programação FPGA para a placa DE1-SoC e o monitoramento por meio do programa Intel FPGA Monitor.
+A porta JTAG possibilita a comunicação entre a placa DE1-SoC e o computador host, permitindo a transferência de arquivos de programação FPGA para a placa DE1-SoC e o monitoramento através do programa Intel FPGA Monitor.
 
 <h3>Compilação Nativa na Placa DE1-SoC</h3>
 
-O processo de compilação nativa ocorre quando um programa é compilado em um sistema para rodar na mesma arquitetura do próprio sistema. Neste caso, vamos compilar nativamente um programa por meio da interface de linha de comando do Linux, usando sua cadeia de ferramentas de compilação integrada. O comando gcc invoca o GNU C Compiler, um compilador de código aberto amplamente usado para compilar programas Linux.
+A compilação nativa ocorre quando um programa é compilado em um sistema para rodar na mesma arquitetura do próprio sistema. Neste caso, a compilação nativa de programas pode ser realizada na placa DE1-SoC através da linha de comando do Linux, utilizando sua cadeia de ferramentas de compilação integrada. O comando gcc invoca o GNU C Compiler, um compilador de código aberto amplamente utilizado para compilar programas Linux, já citado anteriormente.
 
 </div>
 </div>
@@ -162,9 +161,9 @@ Existem outros dois registradores, o "interruptmask" e o "edgecapture". Esses re
 <h2> Drives de Dispositivos de Entrada e Saída (E/S)</h2>
 <div align="justify">
 
-Para realizar a comunicação com os dispositivos periféricos de hardware, é preciso utilizar programas de software, chamados de drivers, que vão disponibilizar a interface necessária para executar comandos nesses dispositivos. Os tipos de drivers utilizados foram os módulos de núcleo, sendo eles, módulos que podem ser adicionados ao núcleo na execução do programa.
+Para interagir com os dispositivos periféricos de hardware, é necessário empregar drivers de software. Esses drivers são programas que fornecem a interface necessária para enviar comandos e receber dados desses dispositivos. Os drivers utilizados são conhecidos como módulos de kernel, os quais podem ser carregados dinamicamente no núcleo do sistema operacional durante a execução do programa.
 
-A distribuição de Linux do DE1-SoC-UP disponibiliza módulos de núcleo prontos para realizar essa comunicação. Na linguagem C, esses módulos podem ser acessados adicionando na compilação do programa o comando "-lintelfpgaup", e no código, a declaração "#include <intelfpgaup/xxx.h>", sendo "xxx", o nome do driver utilizado. A seguir, serão descritas as funções pertinentes do módulo de núcleo utilizado.
+A distribuição de Linux do DE1-SoC-UP disponibiliza módulos de kernel prontos para realizar essa comunicação. Na linguagem C, esses módulos podem ser acessados adicionando na compilação do programa o comando "-lintelfpgaup", e no código, a declaração "#include <intelfpgaup/xxx.h>", sendo "xxx", o nome do driver utilizado. A seguir, serão descritas as funções pertinentes do módulo de kernel utilizado.
 
 <h3> Botões </h3>
 
@@ -176,6 +175,66 @@ Módulo indicado pelo nome "KEYS". As funções utilizadas são:
 
 </div>
 
+<div id="testes"> 
+<h2> Testes </h2>
+<div align="justify">
+
+A seguir, a descrição dos testes realizados para garantir o adequado funcionamento do sistema.
+
+* Transição da tela inicial para a partida.
+
+<p align="center">
+  <img src="Gifs/TelaInicial_Partida.gif" width = "400" />
+</p>
+<p align="center"><strong>Transição da tela inicial para a partida</strong></p>
+
+* Jogador tenta escolher quadrante já ocupado.
+
+<p align="center">
+  <img src="Gifs/QuadranteOcupado.gif" width = "400" />
+</p>
+<p align="center"><strong>Quadrante já ocupado</strong></p>
+
+* Jogador X ganha e escolhe jogar novamente.
+
+<p align="center">
+  <img src="Gifs/JogadorX_Ganha.gif" width = "400" />
+</p>
+<p align="center"><strong>Jogador X ganha</strong></p>
+
+* Jogador O ganha e escolhe jogar novamente.
+
+<p align="center">
+  <img src="Gifs/JogadorO_Ganha.gif" width = "400" />
+</p>
+<p align="center"><strong>Jogador O ganha</strong></p>
+
+* Partida empata e escolhe jogar novamente.
+
+<p align="center">
+  <img src="Gifs/Empate.gif" width = "400" />
+</p>
+<p align="center"><strong>Partida empata</strong></p>
+
+* Um jogador ganha e escolhe sair do jogo.
+
+<p align="center">
+  <img src="Gifs/SairJogo.gif" width = "400" />
+</p>
+<p align="center"><strong>Saindo do jogo</strong></p>
+
+<div id="conclusao"> 
+<h2> Conclusão </h2>
+<div align="justify">
+
+O desenvolvimento do clássico Jogo da Velha, por meio do código em linguagem C no kit de desenvolvimento DE1-SoC, provou proporcionar uma experiência de usuário interativa, simples e direta. Durante o processo de implementação, todos os requisitos estabelecidos foram devidamente atendidos, utilizando da arquitetura da placa e seus drivers como base sólida para a concepção do jogo e desenvolvimento dos algoritmos necessários.
+
+A integração fluida entre o software e o hardware, possibilitada pela placa, permitiu a utilização integrada dos periféricos botões e USB Host (para captura dos movimentos do mouse), amplificando assim, a imersão durante a jogabilidade. Os testes realizados comprovaram a eficiência e credibilidade do sistema, confirmando sua capacidade de operar de maneira consistente em várias condições de jogo.
+
+Este projeto, além de cumprir com seus objetivos iniciais, permitiu uma ampliação significativa dos conhecimentos em sistemas embarcados e arquitetura ARM, além de capacitar os desenvolvedores a integrar aspectos tanto de software quanto de hardware, firmando uma base sólida para futuras explorações nas áreas de sistemas digitais e desenvolvimento de software.
+
+</div>
+</div>
 
 <div id="execucaoProjeto"> 
 <h2> Execução do Projeto  </h2>
