@@ -21,7 +21,7 @@
 #define azulClaro "\033[1;36m" 
 
 //Número necessário de eventos para contabilizar uma mudança de quadrante
-#define sensibilidade 4
+#define sensibilidade 5
 
 //Função para zerar número de determinado evento de movimentação do mouse
 void zeraTemp(int *tempCima, int *tempBaixo, int *tempEsquerda, int *tempDireita){
