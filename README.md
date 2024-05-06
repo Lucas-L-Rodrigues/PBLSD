@@ -38,7 +38,7 @@ Nesta seção, são apresentados os equipamentos e software utilizados durante o
 A placa DE1-SoC é um kit de desenvolvimento que integra um processador ARM Cortex-A9 dual-core com um FPGA Cyclone V da Intel. Este dispositivo oferece uma variedade de periféricos, como display de 7 segmentos, porta Ethernet, USB, porta de áudio, entre outros, tornando-o adequado para projetos que exigem integração de software e hardware. É comumente empregado em ambientes educacionais e de pesquisa para o estudo e desenvolvimento em sistemas embarcados e FPGA
 
 <p align="center">
-  <img src="Images/DE1-SoC_top45_01.jpg" width = "400" />
+  <img src="Imagens/DE1-SoC.png" width = "400" />
 </p>
 <p align="center"><strong>Kit de desenvolvimento DE1-SoC</strong></p>
 
@@ -47,9 +47,9 @@ A placa DE1-SoC é um kit de desenvolvimento que integra um processador ARM Cort
 PRECISA ATUALIZAR.
 
 <p align="center">
-  <img src="Images/Monitor.jpg" width = "400" />
+  <img src="Images/Mouse.png" width = "400" />
 </p>
-<p align="center"><strong>Monitor CRT DELL</strong></p>
+<p align="center"><strong>Mouse Modelo</strong></p>
 
 <h3> Linguagem C</h3>
 
@@ -81,7 +81,7 @@ O processador ARM Cortex-A9 utiliza uma arquitetura de conjunto de instruções 
 O processador ARM Cortex-A9 possui 15 registros de uso geral (R0 a R14), um contador de programa (R15) e um registro de status de programa atual, CPSR, todos com 32 bits. Dois registros são tratados de maneira especial: R13 é o Stack Pointer e R14 é um registro de link na ligação de sub-rotina.
 
 <p align="center">
-  <img src="Images/reg.png" width = "600" />
+  <img src="Imagens/reg.png" width = "600" />
 </p>
 <p align="center"><strong>Registradores disponíveis e sua organização interna</strong></p>
 
@@ -105,12 +105,10 @@ As interrupções de hardware podem ser geradas por dispositivos de E/S, ativand
 
 O sistema DE1-SoC é composto pelo Hard Processor System (HPS) e FPGA dentro do chip Cyclone V SoC. O HPS inclui um processador dual-core ARM Cortex-A9, uma porta de memória DDR3 e dispositivos periféricos. O FPGA implementa dois processadores Intel Nios II e diversas portas periféricas.
 
-
 <p align="center">
-  <img src="Images/Diagrama-em-blocos.png" width = "600" />
+  <img src="Imagens/Diagrama-em-blocos.png" width = "600" />
 </p>
 <p align="center"><strong>Diagrama da arquitetura da placa DE1-SoC</strong></p>
-
 
 <h3>Comunicação entre Processador e FPGA via JTAG</h3>
 
@@ -130,7 +128,7 @@ A compilação nativa ocorre quando um programa é compilado em um sistema para 
 A seguir, será feita as descrições gerais dos periféricos utilizados da placa DE1-SoC e seus aspectos mais importantes. A Figura abaixo mostra a placa FPGA, com as indicações dos seus dispositivos que serão citados.
 
 <p align="center">
-  <img src="Images/BoardLayout.png" width = "600" />
+  <img src="Imagens/Placa_Componentes.png" width = "600" />
 </p>
 <p align="center"><strong> Layout dos periféricos da placa</strong></p>
 
@@ -172,6 +170,154 @@ Módulo indicado pelo nome "KEYS". As funções utilizadas são:
 * KEY_open: Abre a comunicação do dispositivo dos botões;
 * KEY_read: Lê os dados dos botões. É passado como parâmetro um ponteiro que irá setar os sinais retornados dos botões no endereço indicado (0-Não pressionado e 1-Pressionado). Se todos os botões não estão pressionados, o retorno é 0b0000. Caso todos estejam pressionados, o retorno é 0b1111.
 * KEY_close: Fecha a comunicação do dispositivo dos botões;
+
+</div>
+
+<div id="Inteface-Grafica"> 
+<h2> Interface do Usuário </h2>
+<div align="justify">
+
+A seguir, a interface em modo texto exibida para o usuário no terminal, juntamente com as situações em que o uso dos botões interfere no andamento do jogo.
+
+O jogo se inicia com a tela inicial mostrada abaixo. Ela exibe uma mensagem de boas vindas ao jogo e as opções de iniciar a partida ou sair do jogo. Caso o primeiro botão da placa seja pressionado, a partida se inicia. Caso o quarto botão da placa seja pressionado, uma mensagem de despedida é exibida e o sistema é encerrado. 
+
+<p align="center">
+  <img src="Imagens/Menu.png" width = "600" />
+</p>
+<p align="center"><strong>Menu inicial</strong></p>
+
+<p align="center">
+  <img src="Imagens/Menu_Sair.png" width = "600" />
+</p>
+<p align="center"><strong>Transição da tela inicial para encerramento do jogo</strong></p>
+
+O campo de jogo possui os seguintes elementos: o jogador da vez (X ou O), o quadrante selecionado atual (1 ao 9), o tabuleiro editável da partida, o tabuleiro "espelho" utilizado para guiar o usuário para escolha do quadrante e uma mensagem indicando qual botão do mouse clicar para confirmar uma jogada (botão esquerrdo).
+
+<p align="center">
+  <img src="Imagens/Tela_Partida.png" width = "600" />
+</p>
+<p align="center"><strong>Tela de começo de partida</strong></p>
+
+Quando o jogador da vez confirma uma jogada em um quadrante válido, o tabuleiro editável é atualizado, marcando o símbolo refente ao jogador (X ou O) no quadrante escolhido, alterando a mensagem indicando o jogador da vez e o quadrante selecionado.
+
+<p align="center">
+  <img src="Gifs/Transicao_JogadaValida.gif" width = "600" />
+</p>
+<p align="center"><strong>Transição de uma jogada válida</strong></p>
+
+Quando um jogador confirma uma jogada em um quadrante já ocupado, uma mensagem de error é exibida na tela e permanece até que o jogador selecione outro quadrante. 
+
+<p align="center">
+  <img src="Gifs/Transicao_JogadaInvalida.gif" width = "600" />
+</p>
+<p align="center"><strong>Transição de uma jogada inválida</strong></p>
+
+Caso um dos jogadores vença ou a partida termine empatada, é exibido o tabuleiro final da partida com os quadrantes confirmados, além de um menu que exibe o jogador vencedor (X ou O) ou informe que a partida empatou. Esse menu acompanha também, as opções de jogar novamente ou sair do jogo. 
+
+<p align="center">
+  <img src="Imagens/Menu_Vencedor.png" width = "600" />
+</p>
+<p align="center"><strong>Menu exibe jogador vencedor</strong></p>
+
+<p align="center">
+  <img src="Imagens/Menu_Empate.png" width = "600" />
+</p>
+<p align="center"><strong>Menu exibe partida empatada</strong></p>
+
+Caso o botão 1 seja pressionado, a partida é resetada, voltando para a tela inicial da partida. 
+
+<p align="center">
+  <img src="Gifs/Partida_Reinicia.gif" width = "600" />
+</p>
+<p align="center"><strong>Transição reiniciar partida</strong></p>
+
+Caso o botão 4 seja pressionado, uma mensagem de despedida é exibida e o sistema é encerrado.
+
+<p align="center">
+  <img src="Gifs/Partida_Sair.gif" width = "600" />
+</p>
+<p align="center"><strong>Transição sair do jogo</strong></p>
+
+</div>
+
+<div id="Regras-de-jogo"> 
+<h2> Dinâmica e Regras de Jogo </h2>
+<div align="justify">
+
+O objetivo principal do Jogo da Velha é alinhar três de seus respectivos símbolos (X ou O) em linha reta, seja na horizontal, vertical ou diagonal, antes do seu oponente. Para isso, ambos os jogadores devem estar atento as suas jogadas, visando conseguir esse alinhamento o mais cedo possível mas também impedir que o adversário consiga vencer.
+
+<h3> Jogabilidade: Escolha do quadrante </h3>
+
+A escolha do quadrante é baseado na movimentação do mouse conectado à placa DE1-SoC através de uma porta USB Host. Mover o mouse para direita fará com que o quadrante a direta sejam selecionado; mover o mouse para baixo fará com que o quadrante abaixo seja selecionado; mover o mouse para cima fará com que o quadrante acima seja selecionado; mover o mouse para esquerda fará com que o quadrante a esquerda seja selecionado.
+
+A depender do quadrante selecionado, movimentações do mouse são desconsideradas, visto que o tabuleiro é limitado aos seus quadrantes. Ex: caso o quadrante selecionado esteja no 3 (ultima posição da primeira linha), movimentações do mouse para cima e para direita são desconsideradas.
+
+<h3> Jogabilidade: Confirmação do quadrante </h3>
+
+A confirmação da jogada (quadrante) é feita através do clique do botão esquerdo do mouse. A jogada só é válida caso o quadrante confirmado não esteja ocupado. Caso esteja, o jogador deve escolher outro que não esteja ocupado.
+
+É importante salientar, que independente do usuário pressionar o botão esquerdo e segurar, a confirmação da jogada é computada apenas uma única vez.
+
+<h3> Regra: Finalização de uma partida </h3>
+Existem duas condições de finalização de uma partida: vitória de um dos 2 jogadores ou empate. A vitória ocorre quando um dos jogadores, alinha três de seu respectivo símbolo (X ou O) em linha reta, seja na horizontal, vertical ou diagonal, antes do seu oponente ou antes de todos os quadrantes serem preenchidos. Caso todos os quadrantes sejam preenchidos (contabilizando 9 jogadas) e nenhum jogador tenha alinhado seu respectivo símbolo, a partida é finalizada com um empate.
+
+<p>
+<p align="center">
+  <img src="Imagens/regraPartida.png" width = "600" />
+</p>
+<p align="center"><strong> Condições de finalização de uma partida</strong></p>
+
+<div id="Algoritmos"> 
+<h2> Captando eventos do mouse </h2>
+<div align="justify">
+
+Para implementar tanto a seleção dos quadrantes a depender da movimentação do mouse, quanto a confirmação da jogada a depender do clique do botão esquerdo do mouse, foi necessário desenvolver um algoritmo para captar os eventos do mouse conectado a placa. A seguir, serão exibidos em tópicos os passos necessários para concluir essa missão.
+
+<h3> Diretório dev/input/ </h3>
+
+O diretório dev/input é um diretório no sistema de arquivos do Linux que fornece acesso aos dispositivos de entrada, como teclados, mouses e outros dispositivos de entrada. Nesse diretório, cada dispositivo de entrada é representado por um arquivo especial que permite que o sistema leia eventos gerados por esses dispositivos.
+
+Cada evento guarda informações refentes ao: Tipo de evento (movimentação, pressionamento e soltura de botão, rolagem e etc); Código do evento (botão esquerdo ou direito, movimentação para esquerda ou direita e etc); Valor do evento (1 ou 0 indicando botão pressionado ou solto, quantidade de movimentos a direita e etc); além de outras informações como data/hora do evento ou identificação do dispositivo que gerou o evento.
+
+Para captura dos eventos do mouse conectado à placa DE1-SoC através de uma porta USB Host, foi necessário acessar o arquivo especial localizado em dev/input/event0. Esse arquivo fornece uma interface para acessar eventos de entrada do mouse no momento em que ocorrem, permitindo que os aplicativos processem esses eventos em tempo real. Os eventos não são gravados para armazenamento permanente no arquivo, mas sim capturados e consumidos em tempo real pelos programas que os estão lendo.
+
+
+<h3> Acessando dev/input/event0 </h3>
+
+Visando uma melhor compreensão da interação entre software e hardware, além de um melhor entendimento de como esse arquivo escreve seus dados, algumas funções de leitura de arquivo em C foram restringidas para uso. Assim, foi necessário abrir o arquivo especial, compreender os dados dos eventos gravados e identificar os padrões gerados a depender da ação realizada com o mouse.
+
+O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal; "-E" é uma opção de xxd que significa "ler como little-endian"; "-l 48" instrui xxd a limitar a saída a 48 bytes. Limitar a saída a 48 bytes é feita pois os eventos de movimentação e cliques do mouse, utilizam no máximo 3 linhas no arquivo, ou seja, 48 bytes. 
+
+<h3> Lendo e Identificando padrões dos eventos </h3>
+
+Após abrir e ter acesso aos dados exibidos no arquivo especial através do comando shell xxd, os padrões dos eventos foram identificados. Foi constatado que o clique do botão esquerdo do mouse emite dois eventos no arquivo: um que indica pressionamento do botão e outro que indica a soltura do botão. Cada um desses eventos, gravam 3 linhas de dados no arquivo, totalizando assim, 6 linhas (pressionamento e soltura).
+
+<p align="center">
+  <img src="Imagens/cliqueEsq.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de clique esquerdo do mouse</strong></p>
+
+Os padrões de movimentação do mouse também foram identificados. Diferente do padrão de clique esquerdo, os padrões de movimentação gravam apenas 2 linhas de dados no arquivo.
+
+<p align="center">
+  <img src="Imagens/MovCima.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para cima do mouse</strong></p>
+
+<p align="center">
+  <img src="Imagens/MovBaixo.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para baixo do mouse</strong></p>
+
+<p align="center">
+  <img src="Imagens/MovEsquerda.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para esquerda do mouse</strong></p>
+
+<p align="center">
+  <img src="Imagens/MovDireita.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para direita do mouse</strong></p>
 
 </div>
 
