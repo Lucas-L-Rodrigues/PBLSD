@@ -68,7 +68,7 @@ int main() {
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 do {
-                    //Abre o comando xxd -E -l 48 /dev/input/event0 em modo de leitura -> 48 pois so precisa ler 3 linhas
+                    //Abre o comando xxd -E -l 48 /dev/input/event0 em modo de leitura -> 48 pois um evento grava 3 linhas (16 bytes cada)
                     fp = popen("xxd -E -l 48 /dev/input/event0", "r");
                     if (fp == NULL) {
                         printf("Erro ao abrir o comando.\n");
