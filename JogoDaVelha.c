@@ -69,7 +69,11 @@ int main() {
                     //Inicializando vetor de char buffer
                     memset(buffer, 0, sizeof(buffer));
 
-                    //Abre o comando xxd -E -l 16 -p /dev/input/event0 em modo de leitura -> 16 pois equivale a uma linha de um evento (16 bytes)
+                    //Executa o comando xxd -E -l 16 -p /dev/input/event0 que abre arquivo especial em modo de leitura hexadecimal
+                    //-E -> xxd deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian)
+                    //-l 16 -> limitar a saída a 16 bytes (equivale a uma linha de um evento)
+                    //-p -> representação ASCII é desconsiderada
+                    //dev/input/event0 -> arquivo especial que grava eventos do mouse
                     fp = popen("xxd -E -l 16 -p /dev/input/event0", "r");
                     if (fp == NULL) {
                         printf("Erro ao abrir o comando.\n");
