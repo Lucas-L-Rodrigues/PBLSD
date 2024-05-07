@@ -17,24 +17,24 @@ CC = gcc
 CFLAGS = -lintelfpgaup -std=c99
 
 # Regra padrão (primeira regra)
-all: $(PROG)
+all:	$(PROG)
 
 # Regras de compilação para cada arquivo
-%.o: %.c $(wildcard *.h)
-        $(CC) $(CFLAGS) -c $< -o $@
+%.o:	%.c $(wildcard *.h)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Regra para o arquivo executável
-$(PROG): $(OBJS)
-        $(CC) $(OBJS) -o $(PROG)  $(CFLAGS)
+$(PROG):	$(OBJS)
+	$(CC) $(OBJS) -o $(PROG) $(CFLAGS)
 
 # Regra para executar o programa
-run: $(PROG)
-        sudo ./$(PROG)
+run:	$(PROG)
+	sudo ./$(PROG)
 
 # Regra para limpar os arquivos gerados
 clearGerados:
-        rm -f $(PROG) $(OBJS)
+	rm -f $(PROG) $(OBJS)
 
 # Regra para limpar todos os arquivos menos Makefile
 clearAll:
-        rm -f $(PROG) $(OBJS) $(SRCS) $(CABS)
+	rm -f $(PROG) $(OBJS) $(SRCS) $(CABS)
