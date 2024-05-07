@@ -16,8 +16,8 @@ int main() {
     //Quadrante selecionado
     int quadrante;
 
-    //Subida e descida do clique esquerdo do mouse e confirmação da jogada
-    int cliqueEsq, confirma;
+    //Subida e descida do clique esquerdo do mouse
+    int cliqueEsq;
 
     //Temporizadores para contabilizar eventos necessários para mudar quadrante
     int tempCima, tempBaixo, tempDireita, tempEsquerda;
@@ -25,8 +25,8 @@ int main() {
     //Ponteiro para acesso ao arquivo de leitura do evento do mouse
     FILE *fp;
     
-    //Vetor que pega linha por linha de um evento do mouse
-    char buffer[70];
+    //Vetor que pega linha de um evento do mouse (string)
+    char buffer[35];
     
     //Limpa buffer
     KEY_close();
@@ -49,9 +49,11 @@ int main() {
 
     //Botão 1 pressionado
     if (botoes==8) {
+        //Inicializando elementos caso escolha jogar
         cliqueEsq = 0;
         tempCima = 0, tempBaixo = 0, tempDireita = 0, tempEsquerda = 0;
 	    do {
+            //Inicializando elementos do jogo a cada começo de partida
             system("clear");
             inicializarTabuleiro(&tabuleiro);
             jogadas = 0;
@@ -59,42 +61,37 @@ int main() {
             quadrante = 1;
 
             do {
-                //Confirmação de uma jogada é resetada a cada iteração do loop
-                confirma = 0;
-
-                //Inicia vetor buffer
-                memset(buffer, 0, sizeof(buffer));
-                
                 //Exibe tabuleiro editável e espelho, jogador da vez e quadrante selecionado
                 imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 do {
-                    //Abre o comando xxd -E -l 48 /dev/input/event0 em modo de leitura -> 48 pois um evento grava 3 linhas (16 bytes cada)
-                    fp = popen("xxd -E -l 48 /dev/input/event0", "r");
+                    //Inicializando vetor de char buffer
+                    memset(buffer, 0, sizeof(buffer));
+
+                    //Abre o comando xxd -E -l 16 -p /dev/input/event0 em modo de leitura -> 16 pois equivale a uma linha de um evento (16 bytes)
+                    fp = popen("xxd -E -l 16 -p /dev/input/event0", "r");
                     if (fp == NULL) {
                         printf("Erro ao abrir o comando.\n");
                         return 1;
                     }
 
-                    //Enquanto não ler todas as linhas do evento ( 3 linhas ao total )
-                    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
-
+                    //Caso leia uma linha de evento
+                    if(fgets(buffer, sizeof(buffer), fp) != NULL) {
                         //Caso strstr não retorne null -> Clicou botão esquerdo do mouse
                         if (strstr(buffer, mouseEsquerdo) != NULL) {
                             //pressionei botão esquerdo do mouse
                             if(cliqueEsq==0){
-                                confirma = 1;
+                                //Contabiliza pressionando do mouse, fecha arquivo e sai do loop (leitura de eventos)
                                 cliqueEsq++;
+                                pclose(fp);
+                                break;
                             } 
 
                             //soltei botão esquerdo do mouse
                             else
+                                //Zera variável indicando que soltura do botão já ocorreu
                                 cliqueEsq = 0;
-                            
-                            //limpa buffer ( apaga linha já lida )
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
                         }
 
                         //Caso strstr não retorne null -> Moveu mouse para cima
@@ -110,10 +107,6 @@ int main() {
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
-
-                            //limpa buffer ( apaga linha já lida )
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
                         }
 
                         //Caso strstr não retorne null -> Moveu mouse para baixo
@@ -129,10 +122,6 @@ int main() {
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
-
-                            //limpa buffer ( apaga linha já lida )
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
                         }
 
                         //Caso strstr não retorne null -> Moveu mouse para esquerda
@@ -148,10 +137,6 @@ int main() {
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
-
-                            //limpa buffer ( apaga linha já lida )
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
                         }
 
                         //Caso strstr não retorne null -> Moveu mouse para direita
@@ -167,21 +152,14 @@ int main() {
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
-
-                            //limpa buffer ( apaga linha já lida )
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
                         }
-
-                        //Limpa buffer ( apaga linha já lida )
-                        memset(buffer, 0, sizeof(buffer));
                     }
                     
                     //Fecha arquivo de captura dos eventos do mouse
                     pclose(fp);
                 
-                //Enquanto não for clicado botão esquerdo do mouse
-                } while (confirma == 0);
+                //Enquanto não for pressionado botão esquerdo do mouse
+                } while (1);
 
                 //Relaciona o contador ( quadrante selecionado ) com linha e coluna do tabuleiro
                 linha = qualLinha(quadrante);
