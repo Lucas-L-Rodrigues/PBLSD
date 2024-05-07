@@ -59,11 +59,13 @@ int main() {
             quadrante = 1;
 
             do {
+                //Confirmação de uma jogada é resetada a cada iteração do loop
                 confirma = 0;
 
                 //Inicia vetor buffer
                 memset(buffer, 0, sizeof(buffer));
                 
+                //Exibe tabuleiro editável e espelho, jogador da vez e quadrante selecionado
                 imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
 
                 //Capta eventos do mouse até botão esquerdo ser pressionado
@@ -103,6 +105,8 @@ int main() {
                                     quadrante -= 3;
                                     zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
                                     system("clear");
+
+                                    //atualiza quadrante selecionado
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
@@ -120,6 +124,8 @@ int main() {
                                     quadrante += 3;
                                     zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
                                     system("clear");
+
+                                    //atualiza quadrante selecionado
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
@@ -137,6 +143,8 @@ int main() {
                                     quadrante -= 1;
                                     zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
                                     system("clear");
+
+                                    //atualiza quadrante selecionado
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
@@ -154,6 +162,8 @@ int main() {
                                     quadrante += 1;
                                     zeraTemp(&tempBaixo,&tempCima,&tempDireita,&tempEsquerda);
                                     system("clear");
+
+                                    //atualiza quadrante selecionado
                                     imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
                                 }
                             }
