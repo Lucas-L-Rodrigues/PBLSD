@@ -6,13 +6,13 @@
 #include <intelfpgaup/KEY.h>
 
 //Padrão do evento do clique do botão esquerdo do mouse
-#define mouseEsquerdo "0400 0100 0900"
+#define mouseEsquerdo "040001000900" //0400 0100 0900
 
 //Padrões dos eventos de movimentação do mouse
-#define mouseMovCima "0200 0100 ffff"
-#define mouseMovBaixo "0200 0100 0100"
-#define mouseMovDireita "0200 0000 0100"
-#define mouseMovEsquerda "0200 0000 ffff"
+#define mouseMovCima "02000100ffff"  //0200 0100 ffff
+#define mouseMovBaixo "020001000100"  //0200 0100 0100
+#define mouseMovDireita "020000000100"  //0200 0000 0100
+#define mouseMovEsquerda "02000000ffff"  //0200 0000 ffff
 
 //Códigos para alteração de cores dos prints no terminal
 #define padrao "\033[0m"
