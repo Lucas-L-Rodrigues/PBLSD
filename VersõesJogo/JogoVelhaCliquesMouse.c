@@ -20,13 +20,10 @@ int main() {
     FILE *fp;
     
     //vetor que pega linha por linha de um evento do mouse
-    char buffer[70];
+    char buffer[32];
     
     //Subida e descida do clique direito e esquerdo do mouse e confirmação da jogada
-    int cliqueDir, cliqueEsq, confirma;
-    
-    //Limpa buffer
-    KEY_close();
+    int cliqueDir, cliqueEsq;
 
     //Verifica se botão está sendo lido
     if (!KEY_open ( )){
@@ -56,21 +53,18 @@ int main() {
             do {
                 imprimirQuadrante(&jogador,&quadrante,&tabuleiro);
 
-                confirma = 0;
-                memset(buffer, 0, sizeof(buffer));
-
                 //Capta eventos do mouse até botão esquerdo ser pressionado
                 do {
-                    //Abre o comando xxd -E -l 48 /dev/input/event0 em modo de leitura
-                    //48 pois so precisa ler 3 linhas
-                    fp = popen("xxd -E -l 48 /dev/input/event0", "r");
+                    memset(buffer, 0, sizeof(buffer));
+
+                    fp = popen("xxd -E -l 14 -p /dev/input/event0", "r");
                     if (fp == NULL) {
                         printf("Erro ao abrir o comando.\n");
                         return 1;
                     }
 
                     //enquanto não ler todas as linhas do evento ( 3 linhas ao total )
-                    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+                    if (fgets(buffer, sizeof(buffer), fp) != NULL) {
                         //caso strstr não retorne null ( tem o padrão )
                         if (strstr(buffer, mouseDireito) != NULL) {
                             //pressionei botão direito do mouse
@@ -89,37 +83,28 @@ int main() {
                             //soltei botão direito do mouse
                             else
                                 cliqueDir = 0;
-                            
-                            //limpa buffer ( apaga linha já lida )
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
                         }
 
                         //caso strstr não retorne null ( tem o padrão )
                         else if (strstr(buffer, mouseEsquerdo) != NULL) {
                             //pressionei botão esquerdo do mouse
-                            if(cliqueEsq==0)
-                                cliqueEsq++;   
+                            if(cliqueEsq==0){
+                                //Contabiliza pressionando do mouse, fecha arquivo e sai do loop (leitura de eventos)
+                                cliqueEsq++;
+                                pclose(fp);
+                                break;
+                            } 
 
                             //soltei botão esquerdo do mouse
-                            else{
-                                confirma = 1;
+                            else
                                 cliqueEsq = 0;
-                            }
-                            
-                            //limpa buffer ( apaga linha já lida )
-                            memset(buffer, 0, sizeof(buffer));
-                            break;
                         }
+                    } 
 
-                        //limpa buffer ( apaga linha já lida )
-                        memset(buffer, 0, sizeof(buffer));
-                    }
-                    
                     //fecha arquivo de captura dos eventos do mouse
                     pclose(fp);
 
-                } while (confirma==0);
+                } while (1);
 
                 //Relaciona o contador ( quadrante selecionado ) com linha e coluna do tabuleiro
                 linha = qualLinha(quadrante);
@@ -143,7 +128,7 @@ int main() {
                 //Posição já está marcada
                 else{
                     system("clear");
-                    printf(vermelho"\t\tPosição ocupada. Tente novamente."padrao"\n\n");
+                    printf(vermelho"\t\tPosição ocupada. Selecione outro quadrante."padrao"\n\n");
                 } 
             } while (vencedor==' ' && jogadas < 9);
 
