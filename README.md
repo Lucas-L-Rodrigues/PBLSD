@@ -312,7 +312,7 @@ Para captura dos eventos do mouse conectado à placa DE1-SoC através de uma por
 
 <h3> Acessando dev/input/event0 </h3>
 
-O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal; "-E" é uma opção de xxd que significa que deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian); "-l 16" instrui xxd a limitar a saída a 16 bytes. Limitar a saída a 16 bytes é feita pois apesar de eventos gravarem mais de 16 bytes de dados, apenas os 16 primeiros bytes são necessários para identificar padrões.
+O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal; "-E" é uma opção de xxd que significa que deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian); "-l 14" instrui xxd a limitar a saída a 14 bytes. Limitar a saída a 14 bytes é feita pois apesar de eventos gravarem mais de 14 bytes de dados, apenas os 14 primeiros bytes são necessários para identificar padrões.
 
 <h3> Identificando padrões dos eventos </h3>
 
@@ -349,7 +349,7 @@ Os padrões de movimentação do mouse também foram identificados, onde os dado
 
 Visando uma melhor compreensão da interação entre software e hardware, além de um melhor entendimento de como esse arquivo escreve seus dados, algumas funções de leitura de arquivo em C foram restringidas para uso. Assim, foi necessário a utilização do comando "fgets" que lê linhas de texto de um arquivo e armazena como uma string.
 
-Com os padrões devidamente indentificados, o sistema guarda em um array os dados do evento capturado. Assim, no comando "fgets", é passado como parâmetro: o array de char, o tamanho do array em bytes e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que após a leitura do arquivo, o mesmo retorna com 33 caracteres, independente do evento capturado. Por isso o array é definido com um tamanho de 35 caracteres, garantindo que haja espaço suficiente para armazenar cada evento completamente sem estouro de array.
+Com os padrões devidamente indentificados, o sistema guarda em um array os dados do evento capturado. Assim, no comando "fgets", é passado como parâmetro: o array de char, o tamanho do array em bytes e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que após a leitura do arquivo, o mesmo retorna com 29 caracteres, independente do evento capturado. Por isso o array é definido com um tamanho de 32 caracteres, garantindo que haja espaço suficiente para armazenar cada evento completamente sem estouro de array.
 
 O algoritmo opera sobre um loop que continua lendo os eventos do arquivo especial até que determinada condição seja satisfeita. Caso o array seja preenchido com algum dado de evento, ou seja, seja diferente de "NULL", o algoritmo verifica se alguma substring presente no array corresponde a um dos padrões já identificados. Caso uma substring seja identificada, a movimentação é registrada e o algoritmo volta a ler o arquivo especial procurando novos eventos.
 
