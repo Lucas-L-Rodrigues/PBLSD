@@ -6,7 +6,7 @@
 #include <intelfpgaup/KEY.h>
 
 //Padrão do evento do clique do botão esquerdo do mouse
-#define mouseEsquerdo "040001000900" //0400 0100 0900
+#define mouseEsquerdo "040004000100" //0400 0400 0100
 
 //Padrões dos eventos de movimentação do mouse
 #define mouseMovCima "02000100ffff"  //0200 0100 ffff
