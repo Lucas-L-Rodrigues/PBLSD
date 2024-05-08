@@ -188,7 +188,7 @@ int main() {
                 //Posição já está marcada
                 else{
                     system("clear");
-                    printf(vermelho"\t\tPosição ocupada. Tente novamente."padrao"\n\n");
+                    printf(vermelho"\t\tPosição ocupada. Selecione outro quadrante."padrao"\n\n");
                 }
             //Enquanto não tiver um vencedor ou número de jogadas for menor que 9
             } while (vencedor==' ' && jogadas < 9);
