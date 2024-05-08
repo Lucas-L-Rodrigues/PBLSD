@@ -494,9 +494,9 @@ Abra o terminal e execute o seguinte comando para obter o código do repositóri
 
 **Passo 1.1: Alterando caminho de acesso ao arquivo especial**
 
-Caso necessário, altere o caminho de acesso ao arquivo especial que grava eventos do mouse, na linha 77 do código-fonte "JogoDaVelha.c", onde X será a numeração atribuída pelo seu sistema operacional:
+Caso necessário, altere o caminho de acesso ao arquivo especial que grava eventos do mouse, na linha 22 do arquivo header "utils.h", onde X será a numeração atribuída pelo seu sistema operacional:
 
-    xxd -E -l 16 -p /dev/input/eventX
+    xxd -E -l 14 -p /dev/input/eventX
 
 **Passo 2: Compilar o Código em C**
 
