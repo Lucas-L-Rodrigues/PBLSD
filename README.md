@@ -509,4 +509,26 @@ Para apagar todos os arquivos, com exceção do Makefile, use o comando:
 <h2> Referências  </h2>
 <div align="justify">
 
-Périphérique de pointage Dell M-UVDEL1 Wired Optical Mouse. Disponível em: <https://fr.audiofanzine.com/peripherique-de-pointage/dell/m-uvdel1-wired-optical-mouse/>. Acesso em: 7 maio. 2024.
+HOWTOFORGE. HowtoForge: Linux tutorials. Linux xxd Command Tutorial for Beginners (with Examples). Disponível em: <https://www.howtoforge.com/linux-xxd-command/>. Acesso em: 01 de mai. de 2024.
+
+DIE. die.net.xxd(1) - Linux man page. Disponível em: <https://linux.die.net/man/1/xxd>. Acesso em: 02 de mai. de 2024.
+
+THEOPENGROUP.the Open Group.functions. Disponível em: <https://pubs.opengroup.org/onlinepubs/009696799/functions/popen.html>. Acesso em: 30 de abril de 2024.
+
+Liv4IT. How to Create A Hex Dump Of A File Using The xxd Command In Linux. YouTube, 30 de abril de 2019. 10min14s. Disponível em: <https://www.youtube.com/watch?v=Q1oaTgDM6Rs>. Acesso em: 18 de abril de 2024.
+
+STACKEXCHANGE. How do keyboard input and text output work?. Disponível em: <https://unix.stackexchange.com/questions/116629/how-do-keyboard-input-and-text-output-work>. Acesso em: 18 de abril. de 2024.
+
+STACKOVERFLOW. StackOverflow. How do you read the mouse button state from /dev/input/mice?. Disponível em: <https://stackoverflow.com/questions/11451618/how-do-you-read-the-mouse-button-state-from-dev-input-mice>. Acesso em: 19 de abril de 2024.
+
+Introduction to the ARM Cortex-A9 Processor. Disponível em: https://github.com/fpgacademy/Tutorials/releases/download/v21.1/ARM_intro_intelfpga.pdf. Acessado em: 27 de abril de 2024.
+
+Jogo da Velha. Disponível em: https://sites.icmc.usp.br/andretta/ensino/aulas/sme0230-1-20/jogodavelha.c. Acessado em: 5 de abril de 2024.
+
+Using Linux on DE-Series Boards. Disponível em: https://github.com/fpgacademy/Tutorials/releases/download/v21.1/Linux_with_ARM_A9.pdf. Acessado em: 8 de abril de 2024.
+
+DE1-SoC Board. Disponível em: https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=836&PartNo=4. Acessado em: 8 de abril de 2024.
+
+Keyloggers, showkey e Capturando Eventos do Teclado via /dev/input/eventX. Disponível em: https://daemoniolabs.wordpress.com/tag/dev-input-event-teclas-teclado-linux/. Acessado em: 17 de abril de 2024.
+
+CONTRIBUIÇÕES DO JOGO DA VELHA NA APRENDIZAGEM DO JOGO DE XADREZ NAS SÉRIES INICIAIS DO ENSINO. Disponível em: https://www.nucleodoconhecimento.com.br/educacao/jogo-da-velha#:~:text=Duas%20pessoas%20jogam%20alternadamente%2C%20preenchendo,na%20horizontal%2C%20vertical%20ou%20diagonal. Acessado em: 7 de abril de 2024.
