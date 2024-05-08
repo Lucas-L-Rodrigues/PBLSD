@@ -6,8 +6,8 @@
 #include <intelfpgaup/KEY.h>
 
 //Padrões dos eventos do clique dos botões direito e esquerdo do mouse
-#define mouseDireito "0400 0200 0900"
-#define mouseEsquerdo "0400 0100 0900"
+#define mouseDireito "040004000200"
+#define mouseEsquerdo "040004000100"
 
 #define padrao "\033[0m"
 #define vermelho "\033[1;31m"
