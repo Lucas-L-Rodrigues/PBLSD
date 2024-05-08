@@ -323,7 +323,7 @@ Após abrir e ter acesso aos dados exibidos no arquivo especial através do coma
 </p>
 <p align="center"><strong> Padrão em hexadecimal do evento de clique esquerdo do mouse</strong></p>
 
-Os padrões de movimentação do mouse também foram identificados, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A seguir será exibido quatro eventos captados de deslocamento a cada um dos quatro sentidos (esquerda, direita, cima, baixo).
+Os padrões de movimentação do mouse também foram identificados, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A seguir será exibido quatro eventos de deslocamentos captados, em cada um dos quatro sentidos (esquerda, direita, cima, baixo).
 
 <p align="center">
   <img src="Imagens/MovCima.png" width = "900" />
@@ -349,7 +349,7 @@ Os padrões de movimentação do mouse também foram identificados, onde os dado
 
 Visando uma melhor compreensão da interação entre software e hardware, além de um melhor entendimento de como esse arquivo escreve seus dados, algumas funções de leitura de arquivo em C foram restringidas para uso. Assim, foi necessário a utilização do comando "fgets" que lê linhas de texto de um arquivo e armazena como uma string.
 
-Com os padrões devidamente indentificados, o sistema guarda em um array os dados do evento capturado. Assim, no comando "fgets", é passado como parâmetro: o array de char, o tamanho do array em bytes e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que após a leitura do arquivo, o mesmo retorna com 33 caracteres, independente do evento capturado. Por isso o array é definido com um tamanho de 35 bytes, garantindo que haja espaço suficiente para armazenar cada evento completamente sem estouro de array.
+Com os padrões devidamente indentificados, o sistema guarda em um array os dados do evento capturado. Assim, no comando "fgets", é passado como parâmetro: o array de char, o tamanho do array em bytes e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que após a leitura do arquivo, o mesmo retorna com 33 caracteres, independente do evento capturado. Por isso o array é definido com um tamanho de 35 caracteres, garantindo que haja espaço suficiente para armazenar cada evento completamente sem estouro de array.
 
 O algoritmo opera sobre um loop que continua lendo os eventos do arquivo especial até que determinada condição seja satisfeita. Caso o array seja preenchido com algum dado de evento, ou seja, seja diferente de "NULL", o algoritmo verifica se alguma substring presente no array corresponde a um dos padrões já identificados. Caso uma substring seja identificada, a movimentação é registrada e o algoritmo volta a ler o arquivo especial procurando novos eventos.
 
