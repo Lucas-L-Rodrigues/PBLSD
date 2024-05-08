@@ -25,11 +25,8 @@ int main() {
     //Ponteiro para acesso ao arquivo de leitura do evento do mouse
     FILE *fp;
     
-    //Vetor que pega linha de um evento do mouse (string)
-    char buffer[35];
-    
-    //Limpa buffer
-    KEY_close();
+    //Vetor que pega dados de um evento do mouse (string)
+    char buffer[32];
 
     //Verifica se botão está sendo lido
     if (!KEY_open ( )){
@@ -69,12 +66,8 @@ int main() {
                     //Inicializando vetor de char buffer
                     memset(buffer, 0, sizeof(buffer));
 
-                    //Executa o comando xxd -E -l 16 -p /dev/input/event0 que abre arquivo especial em modo de leitura hexadecimal
-                    //-E -> xxd deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian)
-                    //-l 16 -> limitar a saída a 16 bytes (equivale a uma linha de um evento)
-                    //-p -> representação ASCII é desconsiderada
-                    //dev/input/event0 -> arquivo especial que grava eventos do mouse
-                    fp = popen("xxd -E -l 16 -p /dev/input/event0", "r");
+                    //Executa o comando xxd -E -l 14 -p /dev/input/event0 que abre arquivo especial em modo de leitura hexadecimal
+                    fp = popen(comandoArquivoMouse, "r");
                     if (fp == NULL) {
                         printf("Erro ao abrir o comando.\n");
                         return 1;
