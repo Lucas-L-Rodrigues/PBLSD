@@ -36,11 +36,11 @@ O controle do jogo (iniciar, pausar, resetar, etc...), pode ser feito a partir d
         <li><a href="#arq_CPU">  Arquitetura da placa DE1-SoC</a></li>
         <li><a href="#Perifericos-utilizados"> Periféricos da Placa DE1-SoC Utilizados </a></li>
         <li><a href="#Drives"> Drives de Dispositivos de Entrada e Saída (E/S) </a></li>
-        <li><a href="#interface-usuario"> Interface do Usuário </a></li>
-        <li><a href="#Regras-de-jogo"> Dinâmica e Regras de Jogo </a>
+        <li><a href="#Regras-de-jogo"> Jogabilidade e Regras de Jogo </a>
         </li>
         <li><a href="#eventos-mouse"> Captando Eventos do Mouse </a></li>
         <li><a href="#movimentacao-mouse"> Movimentação do mouse X Quadrante selecionado </a></li>
+        <li><a href="#interface-usuario"> Interface do Usuário </a></li>
         <li><a href="#solucao-geral"> Solução Geral do projeto </a></li>
         <li><a href="#testes"> Testes </a></li>
         <li><a href="#conclusao"> Conclusão </a></li>
@@ -57,7 +57,7 @@ Nesta seção, são apresentados os equipamentos e software utilizados durante o
 
 <h3> O kit de desenvolvimento DE1-SoC</h3>
 
-A placa DE1-SoC é um kit de desenvolvimento que integra um processador ARM Cortex-A9 dual-core com um FPGA Cyclone V da Intel. Este dispositivo oferece uma variedade de periféricos, como display de 7 segmentos, porta Ethernet, USB, porta de áudio, entre outros, tornando-o adequado para projetos que exigem integração de software e hardware. É comumente empregado em ambientes educacionais e de pesquisa para o estudo e desenvolvimento em sistemas embarcados e FPGA
+A placa DE1-SoC é um kit de desenvolvimento que integra um processador ARM Cortex-A9 dual-core com um FPGA Cyclone V da Intel. Este dispositivo oferece uma variedade de periféricos, como display de 7 segmentos, porta Ethernet, USB, porta de áudio, entre outros, tornando-o adequado para projetos que exigem integração de software e hardware.
 
 <p align="center">
   <img src="Imagens/DE1-SOC.png" width = "400" />
@@ -66,7 +66,7 @@ A placa DE1-SoC é um kit de desenvolvimento que integra um processador ARM Cort
 
 <h3> Mouse DELL M-UVDEL1</h3>
 
-O Dell M-UVDEL1 é um mouse óptico com fio. Possui uma função padrão de dois botões, uma roda central clicável e um design de mão ambidestro, usa o laser óptico vermelho padrão para rastreamento na parte inferior.
+O Dell M-UVDEL1 é um mouse óptico com fio. Possui uma função padrão de dois botões, uma roda central clicável e um design de mão ambidestro. Além disso, usa um laser óptico vermelho padrão para rastreamento na parte inferior.
 
 <p align="center">
   <img src="Imagens/Mouse.png" width = "270" />
@@ -92,7 +92,7 @@ O Visual Studio Code, também conhecido como VSCode, é um ambiente de desenvolv
 <h2> Arquitetura da placa DE1-SoC</h2>
 <div align="justify">
 
-Nesta seção, será explorado a arquitetura da placa DE1-SoC, incluindo o processador ARM Cortex-A9, a estrutura de registros, o mapeamento de dispositivos de entrada/saída na memória, a memória utilizada, a comunicação entre o processador e o FPGA, e o processo de compilação nativa na placa.
+Nesta seção, será explorado a arquitetura da placa DE1-SoC, incluindo o processador ARM Cortex-A9, a estrutura de registros, a memória utilizada, a comunicação entre o processador e o FPGA, e o processo de compilação nativa na placa.
 
 <h3>Visão Geral dos Recursos do Processador ARM Cortex-A9 </h3>
 
@@ -107,25 +107,13 @@ O processador ARM Cortex-A9 possui 15 registros de uso geral (R0 a R14), um cont
 </p>
 <p align="center"><strong>Registradores disponíveis e sua organização interna</strong></p>
 
-<h3>Instruções e Conjunto Thumb</h3>
-
-As instruções têm 32 bits e são armazenadas na memória alinhadas em palavras. O conjunto Thumb oferece uma versão compacta com instruções de 16 bits, reduzindo os requisitos de memória, o que é vantajoso em aplicações embarcadas.
-
 <h3>Memória</h3>
 
 O HPS inclui uma interface de memória que conecta o ARM MPCORE a uma memória DDR3 de 1 GB. Essa memória é comumente utilizada para armazenamento de programas e dados pelos processadores ARM. A memória é organizada em 256M x 32 bits e pode ser acessada por operações de palavra (32 bits), meia-palavra e byte.
 
-<h3>Mapeamento de Dispositivos de E/S</h3>
-
-Os dispositivos de entrada/saída acessíveis pelo processador ARM são mapeados na memória e podem ser acessados como locais de memória através de instruções Load e Store.
-
-<h3>Interrupções de Hardware</h3>
-
-As interrupções de hardware podem ser geradas por dispositivos de E/S, ativando as entradas de solicitação de interrupção do processador (IRQ ou FIQ). Quando ocorre uma interrupção, o processador entra no modo de exceção correspondente e salva o estado atual do programa. O endereço salvo no registrador de link deve ser decrementado em 4 antes de retornar ao programa interrompido.
-
 <h3>Diagrama de Blocos do Sistema DE1-SoC</h3>
 
-O sistema DE1-SoC é composto pelo Hard Processor System (HPS) e FPGA dentro do chip Cyclone V SoC. O HPS inclui um processador dual-core ARM Cortex-A9, uma porta de memória DDR3 e dispositivos periféricos. O FPGA implementa dois processadores Intel Nios II e diversas portas periféricas.
+O sistema DE1-SoC é formado pelo Hard Processor System (HPS) e FPGA dentro do chip Cyclone V. O HPS inclui um processador dual-core ARM Cortex-A9, uma porta de memória DDR3 e dispositivos periféricos. O FPGA implementa dois processadores Intel Nios II e diversas portas periféricas.
 
 <p align="center">
   <img src="Imagens/Diagrama-em-blocos.png" width = "600" />
@@ -156,9 +144,9 @@ A seguir, será feita as descrições gerais dos periféricos utilizados da plac
 
 <h3>Gigabit Ethernet</h3>
 
-A placa suporta transferência Gigabit Ethernet por um chip externo Micrel KSZ9021RN PHY e função HPS Ethernet MAC. 
+A placa suporta a tecnologia de rede que permite a transmissão de dados a uma velocidade de até 1 gigabit por segundo (Gbps). Além de fornecer alta velocidade, também enterag desempenho confiável em redes locais, permitindo uma comunicação rápida e eficiente entre os dispositivos conectados à rede. 
 
-Existem dois LEDs, LED verde (LEDG) e LED amarelo (LEDY), que representam o status da Ethernet PHY (KSZ9021RNI). Os sinais de controle dos LEDs são conectados aos LEDs no conector RJ45. A conexão da placa ao Gigabit Ethernet é estabelecida quando o LEDG acende.
+Existem dois LEDs, LED verde (LEDG) e LED amarelo (LEDY), que representam o status da Ethernet PHY (KSZ9021RNI). A conexão da placa ao Gigabit Ethernet é estabelecida quando o LEDG acende.
 
 <h3>USB Host</h3>
 
@@ -194,6 +182,134 @@ Módulo indicado pelo nome "KEYS". As funções utilizadas são:
 * KEY_read: Lê os dados dos botões. É passado como parâmetro um ponteiro que irá setar os sinais retornados dos botões no endereço indicado (0-Não pressionado e 1-Pressionado). Se todos os botões não estão pressionados, o retorno é 0b0000. Caso todos estejam pressionados, o retorno é 0b1111.
 
 * KEY_close: Fecha a comunicação do dispositivo dos botões;
+
+</div>
+</div>
+
+<div id="Regras-de-jogo"> 
+<h2> Jogabilidade e Regras de Jogo </h2>
+<div align="justify">
+
+O objetivo principal do Jogo da Velha é alinhar três de seus respectivos símbolos (X ou O) em linha reta, seja na horizontal, vertical ou diagonal, antes do seu oponente. Para isso, ambos os jogadores devem estar atento as suas jogadas, visando conseguir esse alinhamento o mais cedo possível mas também impedir que o adversário consiga vencer.
+
+<h3> Jogabilidade: Escolha do quadrante </h3>
+
+A escolha do quadrante é baseado na movimentação do mouse conectado à placa DE1-SoC através de uma porta USB Host. Mover o mouse para direita fará com que o quadrante a direta sejam selecionado; mover o mouse para baixo fará com que o quadrante abaixo seja selecionado; mover o mouse para cima fará com que o quadrante acima seja selecionado; mover o mouse para esquerda fará com que o quadrante a esquerda seja selecionado.
+
+A depender do quadrante selecionado, movimentações do mouse são desconsideradas, visto que o tabuleiro é limitado aos seus quadrantes. Por exemplo, caso o quadrante selecionado esteja no 3 (ultima posição da primeira linha), movimentações do mouse para cima e para direita são desconsideradas.
+
+<h3> Jogabilidade: Confirmação do quadrante </h3>
+
+A confirmação da jogada (quadrante) é feita através do clique do botão esquerdo do mouse. A jogada só é válida caso o quadrante confirmado não esteja ocupado. Caso esteja, o jogador deve escolher outro que não esteja ocupado.
+
+É importante salientar, que independente do usuário pressionar o botão esquerdo e segurar, a confirmação da jogada é computada apenas uma única vez.
+
+<h3> Regra: Finalização de uma partida </h3>
+Existem duas condições de finalização de uma partida: vitória de um dos 2 jogadores ou empate. A vitória ocorre quando um dos jogadores, alinha três de seu respectivo símbolo (X ou O) em linha reta, seja na horizontal, vertical ou diagonal, antes do seu oponente ou antes de todos os quadrantes serem preenchidos. Caso todos os quadrantes sejam preenchidos (contabilizando 9 jogadas) e nenhum jogador tenha alinhado seu respectivo símbolo, a partida é finalizada com um empate.
+
+<p>
+<p align="center">
+  <img src="Imagens/regraPartida.png" width = "600" />
+</p>
+<p align="center"><strong> Condições de finalização de uma partida</strong></p>
+
+</div>
+</div>
+
+<div id="eventos-mouse"> 
+<h2> Captando Eventos do Mouse </h2>
+<div align="justify">
+
+Para implementar tanto a seleção dos quadrantes a depender da movimentação do mouse, quanto a confirmação da jogada a depender do clique do botão esquerdo do mouse, foi necessário acessar o arquivo especial no sistema Linux para captar os eventos do mouse conectado a placa. A seguir, serão exibidos em tópicos os passos necessários para concluir essa tarefa.
+
+<h3> Diretório dev/input/ </h3>
+
+O diretório dev/input é um diretório no sistema de arquivos do Linux que fornece acesso aos dispositivos de entrada, como teclados, mouses e outros dispositivos de entrada. Nesse diretório, cada dispositivo de entrada é representado por um arquivo especial que permite que o sistema leia eventos gerados por esses dispositivos.
+
+Cada evento guarda informações refentes ao: Tipo de evento (movimentação, pressionamento e soltura de botão, rolagem e etc); Código do evento (botão esquerdo ou direito, movimentação para esquerda ou direita e etc); Valor do evento (1 ou 0 indicando botão pressionado ou solto, quantidade de movimentos a direita e etc); além de outras informações como data/hora do evento ou identificação do dispositivo que gerou o evento.
+
+Para captura dos eventos do mouse conectado à placa DE1-SoC através de uma porta USB Host, foi necessário acessar o arquivo especial localizado em dev/input/event0. Por decisão do sistema operacional, esse arquivo fornece uma interface para acessar eventos de entrada do mouse no momento em que ocorrem, permitindo que os aplicativos processem esses eventos em tempo real. Os eventos não são gravados para armazenamento permanente no arquivo, mas sim capturados e consumidos em tempo real pelos programas que os estão lendo.
+
+<h3> Acessando dev/input/event0 </h3>
+
+O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal e ASCII; "-E" é uma opção de xxd que significa que deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian); "-l 14" instrui xxd a limitar a saída a 14 bytes; e "-p" instrui xxd a desconsiderar representação ASCII. Limitar a saída a 14 bytes é feita pois apesar de eventos emitirem mais de 14 bytes de dados, apenas os 14 primeiros bytes são necessários para identificar padrões.
+
+<h3> Identificando padrões dos eventos </h3>
+
+Após abrir e ter acesso aos dados exibidos no arquivo especial através do comando shell xxd, os padrões dos eventos foram identificados. Foi constatado que o clique do botão esquerdo do mouse emite dois eventos: um que indica pressionamento do botão e outro que indica a soltura do botão. Cada um desses eventos exibe os padrões ilustrados a seguir, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A primeira e terceira linha indicam pressionamento do botão esquerdo do mouse. A segunda e quarta linha indicam soltura do botão esquerdo do mouse.
+
+<p align="center">
+  <img src="Imagens/cliqueEsq.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de clique esquerdo do mouse</strong></p>
+
+Os padrões de movimentação do mouse também foram identificados, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A seguir será exibido quatro eventos de deslocamentos captados, em cada um dos quatro sentidos (esquerda, direita, cima, baixo).
+
+<p align="center">
+  <img src="Imagens/MovCima.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para cima do mouse</strong></p>
+
+<p align="center">
+  <img src="Imagens/MovBaixo.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para baixo do mouse</strong></p>
+
+<p align="center">
+  <img src="Imagens/MovEsquerda.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para esquerda do mouse</strong></p>
+
+<p align="center">
+  <img src="Imagens/MovDireita.png" width = "900" />
+</p>
+<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para direita do mouse</strong></p>
+
+<h3> Lendo padrões dos eventos </h3>
+
+Visando uma melhor compreensão da interação entre software e hardware, além de um melhor entendimento de como esse arquivo escreve seus dados, algumas funções de leitura de arquivo em C foram restringidas para uso. Assim, foi necessário a utilização do comando "fgets" que lê linhas de texto de um arquivo e armazena como uma string.
+
+Com os padrões devidamente indentificados, o sistema guarda em um array os dados do evento capturado. Assim, no comando "fgets", é passado como parâmetro: o array de char, o tamanho do array em bytes e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que após a leitura do arquivo, o mesmo retorna com 29 caracteres, independente do evento capturado. Por isso o array é definido com um tamanho de 32 caracteres, garantindo que haja espaço suficiente para armazenar cada evento completamente sem estouro de array.
+
+O algoritmo opera sobre um loop que continua lendo os eventos do arquivo especial até que determinada condição seja satisfeita. Caso o array seja preenchido com algum dado de evento, ou seja, seja diferente de "NULL", o algoritmo verifica se alguma substring presente no array corresponde a um dos padrões já identificados. Caso uma substring seja identificada, a movimentação é registrada e o algoritmo volta a ler o arquivo especial procurando novos eventos.
+
+Através da lógica implementada com esse algoritmo, a tarefa de captar e identificar os eventos do mouse foi cumprida, restando agora, implementar esse algoritmo no projeto principal: O Jogo da Velha.
+
+</div>
+</div>
+
+<div id="movimentacao-mouse"> 
+<h2> Movimentação do mouse X Quadrante selecionado </h2>
+<div align="justify">
+
+Para fazer a relação entre os eventos capturados de movimentação do mouse com a seleção de um quadrante do tabuleiro, o algoritmo citado anteriormente foi adaptado. Como um leve deslocamente do mouse já gera um evento de movimentação, o não regulamento dessas ações dificultaria para o usuário do sistema controlar qual quadrante ele quer selecionar. Visando combater essa problemática, a solução implementada será descrita a seguir em tópicos.
+
+<h3> Contadores para cada tipo de movimentação </h3>
+
+A implementação dos contadores para cada tipo de movimentação, soluciona o problema de controle sobre a seleção de quadrante. Assim, cada movimentação capturada do mouse (cima, baixo, esquerda, direita) conta com um contador próprio que contabiliza quantas vezes cada ação ocorreu.
+
+Por decisão de projeto, foi definido que para um quadrante ser selecionado, é necessário que ocorra cinco capturas de determinado evento. Por exemplo, caso o quadrante selecionado seja 1 e o algoritmo capte cinco movimentação para direita, o quadrante 2 é selecionado e o valor do quadrante selecionado é atualizado em tela. Essa implementação impede também que a variável do quadrante seja impressa na tela repetidamente a qualquer tipo de movimentação do mouse.
+
+<p align="center">
+  <img src="Imagens/quadrantesTabuleiro.png" width = "200" />
+</p>
+<p align="center"><strong> Quadrantes do tabuleiro</strong></p>
+
+Como outras movimentações podem ser capturas durante o deslocamente do mouse, é necessário que cada movimentação tenha seu próprio contador, evitando assim que outra movimentação não intencional contribua na contagem de ações. Por exemplo, caso o algoritmo implementasse apenas um contador compartilhado para todas as movimentações, ao desolocar o mouse para direita, um possível evento de movimentação para cima poderia ser capturado, fazendo com que 4 movimentações para direita e 1 movimentação para cima, determinasse uma movimentação para cima, alterando o quadrante para um acima.
+
+Utilizando contadores individuais, o primeiro a somar cinco capturas de determinado evento é oque irá ser contabilizado e o devido quadrante será selecionado. Após ser identificado um contador com cinco capturas, todos os contadores (cima,baixo,esquerda,direita) são zerados, fazendo com que seja necessário mais cinco movimentações específicas para determinar um novo quadrante, evitando assim, que as ações contabilizadas anteriormente interfiram nas próximas.
+
+<h3> Movimentações desconsideradas </h3>
+
+Por fim, o ultimo problema a ser resolvido foi ignorar movimentações caso o quadrante atual selecionado no tabuleiro não possua quadrantes vizinhos referentes a determinada movimentação. Por exemplo, caso o quadrante selecionado seja o 3, movimentações para direita ou para cima, não devem ser contabilizadas ao contador, visto que não tem quadrantes à direta e acima do quadrante 3 no tabuleiro. Dessa forma, foram adicionadas condições de verificação para cada quadrante selecionado. As movimentações ignoradas a depender do quadrante selecionado são expostas a seguir.
+
+* Movimentação para cima -> Quadrantes 1 ao 3.
+
+* Movimentação para baixo -> Quadrantes 7 ao 9.
+
+* Movimentação para direita -> Quadrantes 3, 6, 9.
+
+* Movimentação para esquerda -> Quadrantes 1, 4, 7.
 
 </div>
 </div>
@@ -262,134 +378,6 @@ Caso o botão 4 seja pressionado, uma mensagem de despedida é exibida e o siste
   <img src="Gifs/Partida_Sair.gif" width = "600" />
 </p>
 <p align="center"><strong>Transição sair do jogo</strong></p>
-
-</div>
-</div>
-
-<div id="Regras-de-jogo"> 
-<h2> Dinâmica e Regras de Jogo </h2>
-<div align="justify">
-
-O objetivo principal do Jogo da Velha é alinhar três de seus respectivos símbolos (X ou O) em linha reta, seja na horizontal, vertical ou diagonal, antes do seu oponente. Para isso, ambos os jogadores devem estar atento as suas jogadas, visando conseguir esse alinhamento o mais cedo possível mas também impedir que o adversário consiga vencer.
-
-<h3> Jogabilidade: Escolha do quadrante </h3>
-
-A escolha do quadrante é baseado na movimentação do mouse conectado à placa DE1-SoC através de uma porta USB Host. Mover o mouse para direita fará com que o quadrante a direta sejam selecionado; mover o mouse para baixo fará com que o quadrante abaixo seja selecionado; mover o mouse para cima fará com que o quadrante acima seja selecionado; mover o mouse para esquerda fará com que o quadrante a esquerda seja selecionado.
-
-A depender do quadrante selecionado, movimentações do mouse são desconsideradas, visto que o tabuleiro é limitado aos seus quadrantes. Por exemplo, caso o quadrante selecionado esteja no 3 (ultima posição da primeira linha), movimentações do mouse para cima e para direita são desconsideradas.
-
-<h3> Jogabilidade: Confirmação do quadrante </h3>
-
-A confirmação da jogada (quadrante) é feita através do clique do botão esquerdo do mouse. A jogada só é válida caso o quadrante confirmado não esteja ocupado. Caso esteja, o jogador deve escolher outro que não esteja ocupado.
-
-É importante salientar, que independente do usuário pressionar o botão esquerdo e segurar, a confirmação da jogada é computada apenas uma única vez.
-
-<h3> Regra: Finalização de uma partida </h3>
-Existem duas condições de finalização de uma partida: vitória de um dos 2 jogadores ou empate. A vitória ocorre quando um dos jogadores, alinha três de seu respectivo símbolo (X ou O) em linha reta, seja na horizontal, vertical ou diagonal, antes do seu oponente ou antes de todos os quadrantes serem preenchidos. Caso todos os quadrantes sejam preenchidos (contabilizando 9 jogadas) e nenhum jogador tenha alinhado seu respectivo símbolo, a partida é finalizada com um empate.
-
-<p>
-<p align="center">
-  <img src="Imagens/regraPartida.png" width = "600" />
-</p>
-<p align="center"><strong> Condições de finalização de uma partida</strong></p>
-
-</div>
-</div>
-
-<div id="eventos-mouse"> 
-<h2> Captando Eventos do Mouse </h2>
-<div align="justify">
-
-Para implementar tanto a seleção dos quadrantes a depender da movimentação do mouse, quanto a confirmação da jogada a depender do clique do botão esquerdo do mouse, foi necessário acessar o arquivo especial no sistema Linux para captar os eventos do mouse conectado a placa. A seguir, serão exibidos em tópicos os passos necessários para concluir essa tarefa.
-
-<h3> Diretório dev/input/ </h3>
-
-O diretório dev/input é um diretório no sistema de arquivos do Linux que fornece acesso aos dispositivos de entrada, como teclados, mouses e outros dispositivos de entrada. Nesse diretório, cada dispositivo de entrada é representado por um arquivo especial que permite que o sistema leia eventos gerados por esses dispositivos.
-
-Cada evento guarda informações refentes ao: Tipo de evento (movimentação, pressionamento e soltura de botão, rolagem e etc); Código do evento (botão esquerdo ou direito, movimentação para esquerda ou direita e etc); Valor do evento (1 ou 0 indicando botão pressionado ou solto, quantidade de movimentos a direita e etc); além de outras informações como data/hora do evento ou identificação do dispositivo que gerou o evento.
-
-Para captura dos eventos do mouse conectado à placa DE1-SoC através de uma porta USB Host, foi necessário acessar o arquivo especial localizado em dev/input/event0. Por decisão do sistema operacional, esse arquivo fornece uma interface para acessar eventos de entrada do mouse no momento em que ocorrem, permitindo que os aplicativos processem esses eventos em tempo real. Os eventos não são gravados para armazenamento permanente no arquivo, mas sim capturados e consumidos em tempo real pelos programas que os estão lendo.
-
-<h3> Acessando dev/input/event0 </h3>
-
-O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal; "-E" é uma opção de xxd que significa que deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian); "-l 14" instrui xxd a limitar a saída a 14 bytes. Limitar a saída a 14 bytes é feita pois apesar de eventos gravarem mais de 14 bytes de dados, apenas os 14 primeiros bytes são necessários para identificar padrões.
-
-<h3> Identificando padrões dos eventos </h3>
-
-Após abrir e ter acesso aos dados exibidos no arquivo especial através do comando shell xxd, os padrões dos eventos foram identificados. Foi constatado que o clique do botão esquerdo do mouse emite dois eventos: um que indica pressionamento do botão e outro que indica a soltura do botão. Cada um desses eventos exibe os padrões ilustrados a seguir, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A primeira e terceira linha indicam pressionamento do botão esquerdo do mouse. A segunda e quarta linha indicam soltura do botão esquerdo do mouse.
-
-<p align="center">
-  <img src="Imagens/cliqueEsq.png" width = "900" />
-</p>
-<p align="center"><strong> Padrão em hexadecimal do evento de clique esquerdo do mouse</strong></p>
-
-Os padrões de movimentação do mouse também foram identificados, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A seguir será exibido quatro eventos de deslocamentos captados, em cada um dos quatro sentidos (esquerda, direita, cima, baixo).
-
-<p align="center">
-  <img src="Imagens/MovCima.png" width = "900" />
-</p>
-<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para cima do mouse</strong></p>
-
-<p align="center">
-  <img src="Imagens/MovBaixo.png" width = "900" />
-</p>
-<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para baixo do mouse</strong></p>
-
-<p align="center">
-  <img src="Imagens/MovEsquerda.png" width = "900" />
-</p>
-<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para esquerda do mouse</strong></p>
-
-<p align="center">
-  <img src="Imagens/MovDireita.png" width = "900" />
-</p>
-<p align="center"><strong> Padrão em hexadecimal do evento de movimentação para direita do mouse</strong></p>
-
-<h3> Lendo padrões dos eventos </h3>
-
-Visando uma melhor compreensão da interação entre software e hardware, além de um melhor entendimento de como esse arquivo escreve seus dados, algumas funções de leitura de arquivo em C foram restringidas para uso. Assim, foi necessário a utilização do comando "fgets" que lê linhas de texto de um arquivo e armazena como uma string.
-
-Com os padrões devidamente indentificados, o sistema guarda em um array os dados do evento capturado. Assim, no comando "fgets", é passado como parâmetro: o array de char, o tamanho do array em bytes e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que após a leitura do arquivo, o mesmo retorna com 29 caracteres, independente do evento capturado. Por isso o array é definido com um tamanho de 32 caracteres, garantindo que haja espaço suficiente para armazenar cada evento completamente sem estouro de array.
-
-O algoritmo opera sobre um loop que continua lendo os eventos do arquivo especial até que determinada condição seja satisfeita. Caso o array seja preenchido com algum dado de evento, ou seja, seja diferente de "NULL", o algoritmo verifica se alguma substring presente no array corresponde a um dos padrões já identificados. Caso uma substring seja identificada, a movimentação é registrada e o algoritmo volta a ler o arquivo especial procurando novos eventos.
-
-Através da lógica implementada com esse algoritmo, a tarefa de captar e identificar os eventos do mouse foi cumprida, restando agora, implementar esse algoritmo no projeto principal: O Jogo da Velha.
-
-</div>
-</div>
-
-<div id="movimentacao-mouse"> 
-<h2> Movimentação do mouse X Quadrante selecionado </h2>
-<div align="justify">
-
-Para fazer a relação entre os eventos capturados de movimentação do mouse com a seleção de um quadrante do tabuleiro, o algoritmo citado anteriormente foi adaptado. Como um leve deslocamente do mouse já gera um evento de movimentação, o não regulamento dessas ações dificultaria para o usuário do sistema controlar qual quadrante ele quer selecionar. Visando combater essa problemática, a solução implementada será descrita a seguir em tópicos.
-
-<h3> Contadores para cada tipo de movimentação </h3>
-
-A implementação dos contadores para cada tipo de movimentação, soluciona o problema de controle sobre a seleção de quadrante. Assim, cada movimentação capturada do mouse (cima, baixo, esquerda, direita) conta com um contador próprio que contabiliza quantas vezes cada ação ocorreu.
-
-Por decisão de projeto, foi definido que para um quadrante ser selecionado, é necessário que ocorra cinco capturas de determinado evento. Por exemplo, caso o quadrante selecionado seja 1 e o algoritmo capte cinco movimentação para direita, o quadrante 2 é selecionado e o valor do quadrante selecionado é atualizado em tela. Essa implementação impede também que a variável do quadrante seja impressa na tela repetidamente a qualquer tipo de movimentação do mouse.
-
-<p align="center">
-  <img src="Imagens/quadrantesTabuleiro.png" width = "200" />
-</p>
-<p align="center"><strong> Quadrantes do tabuleiro</strong></p>
-
-Como outras movimentações podem ser capturas durante o deslocamente do mouse, é necessário que cada movimentação tenha seu próprio contador, evitando assim que outra movimentação não intencional contribua na contagem de ações. Por exemplo, caso o algoritmo implementasse apenas um contador compartilhado para todas as movimentações, ao desolocar o mouse para direita, um possível evento de movimentação para cima poderia ser capturado, fazendo com que 4 movimentações para direita e 1 movimentação para cima, determinasse uma movimentação para cima, alterando o quadrante para um acima.
-
-Utilizando contadores individuais, o primeiro a somar 5 capturas de determinado evento é oque irá ser contabilizado e o devido quadrante será selecionado. Após ser identificado um contador com 5 capturas, todos os contadores (cima,baixo,esquerda,direita) são zerados, fazendo com que seja necessário mais 5 movimentações específicas para determinar um novo quadrante, evitando assim, que as ações contabilizadas anteriormente interfiram nas próximas.
-
-<h3> Movimentações desconsideradas </h3>
-
-Por fim, o ultimo problema a ser resolvido foi ignorar movimentações caso o quadrante atual selecionado no tabuleiro não possua quadrantes vizinhos referentes a determinada movimentação. Por exemplo, caso o quadrante selecionado seja o 3, movimentações para direita ou para cima, não devem ser contabilizadas ao contador, visto que não tem quadrantes à direta e acima do quadrante 3 no tabuleiro. Dessa forma, foram adicionadas condições de verificação para cada quadrante selecionado. As movimentações ignoradas a depender do quadrante selecionado são expostas a seguir.
-
-* Movimentação para cima -> Quadrantes 1 ao 3.
-
-* Movimentação para baixo -> Quadrantes 7 ao 9.
-
-* Movimentação para direita -> Quadrantes 3, 6, 9.
-
-* Movimentação para esquerda -> Quadrantes 1, 4, 7.
 
 </div>
 </div>
@@ -475,7 +463,7 @@ O desenvolvimento do clássico Jogo da Velha, por meio do código em linguagem C
 
 A integração fluida entre o software e o hardware, possibilitada pela placa, permitiu a utilização integrada dos periféricos botões e USB Host (para captura dos movimentos do mouse), amplificando assim, a imersão durante a jogabilidade. Os testes realizados comprovaram a eficiência e credibilidade do sistema, confirmando sua capacidade de operar de maneira consistente em várias condições de jogo.
 
-Este projeto, além de cumprir com seus objetivos iniciais, permitiu uma ampliação significativa dos conhecimentos em sistemas embarcados e arquitetura ARM, além de capacitar os desenvolvedores a integrar aspectos tanto de software quanto de hardware, firmando uma base sólida para futuras explorações nas áreas de sistemas digitais e desenvolvimento de software.
+Este projeto, além de cumprir com seus objetivos iniciais, permitiu uma ampliação significativa dos conhecimentos em sistemas embarcados e arquitetura ARM, além de capacitar os desenvolvedores a integrar aspectos tanto de software quanto de hardware.
 
 </div>
 </div>
