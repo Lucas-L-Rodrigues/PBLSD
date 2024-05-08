@@ -60,18 +60,18 @@ Nesta seção, são apresentados os equipamentos e software utilizados durante o
 A placa DE1-SoC é um kit de desenvolvimento que integra um processador ARM Cortex-A9 dual-core com um FPGA Cyclone V da Intel. Este dispositivo oferece uma variedade de periféricos, como display de 7 segmentos, porta Ethernet, USB, porta de áudio, entre outros, tornando-o adequado para projetos que exigem integração de software e hardware. É comumente empregado em ambientes educacionais e de pesquisa para o estudo e desenvolvimento em sistemas embarcados e FPGA
 
 <p align="center">
-  <img src="Imagens/DE1-SoC.png" width = "400" />
+  <img src="Imagens/DE1-SOC.png" width = "400" />
 </p>
 <p align="center"><strong>Kit de desenvolvimento DE1-SoC</strong></p>
 
-<h3> Mouse</h3>
+<h3> Mouse DELL M-UVDEL1</h3>
 
-PRECISA ATUALIZAR.
+O Dell M-UVDEL1 é um mouse óptico com fio. Possui uma função padrão de dois botões, uma roda central clicável e um design de mão ambidestro, usa o laser óptico vermelho padrão para rastreamento na parte inferior.
 
 <p align="center">
-  <img src="Images/Mouse.png" width = "400" />
+  <img src="Imagens/Mouse.png" width = "270" />
 </p>
-<p align="center"><strong>Mouse Modelo</strong></p>
+<p align="center"><strong>Mouse DELL</strong></p>
 
 <h3> Linguagem C</h3>
 
@@ -204,7 +204,7 @@ Módulo indicado pelo nome "KEYS". As funções utilizadas são:
 
 A seguir, a interface em modo texto exibida para o usuário no terminal, juntamente com as situações em que o uso dos botões interfere no andamento do jogo.
 
-O jogo se inicia com a tela inicial mostrada abaixo. Ela exibe uma mensagem de boas vindas ao jogo e as opções de iniciar a partida ou sair do jogo. Caso o usuário deseje iniciar partida, a partida se inicia. Caso o usuário deseje sair do jogo, uma mensagem de despedida é exibida e o sistema é encerrado. 
+O jogo se inicia com a tela inicial mostrada abaixo. Ela exibe uma mensagem de boas vindas ao jogo e as opções de iniciar a partida ou sair do jogo. Caso o usuário escolha iniciar partida, a partida se inicia. Caso o usuário escolha sair do jogo, uma mensagem de despedida é exibida e o sistema é encerrado. 
 
 <p align="center">
   <img src="Imagens/Menu.png" width = "600" />
@@ -520,3 +520,5 @@ Para apagar todos os arquivos, com exceção do Makefile, use o comando:
 <div id="referencias"> 
 <h2> Referências  </h2>
 <div align="justify">
+
+Périphérique de pointage Dell M-UVDEL1 Wired Optical Mouse. Disponível em: <https://fr.audiofanzine.com/peripherique-de-pointage/dell/m-uvdel1-wired-optical-mouse/>. Acesso em: 7 maio. 2024.
