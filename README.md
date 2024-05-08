@@ -398,7 +398,7 @@ Por fim, o ultimo problema a ser resolvido foi ignorar movimentações caso o qu
 <h2> Solução Geral do projeto </h2>
 <div align="justify">
 
-A solução abrangente deste sistema reflete sua total capacidade de atender a todos os requisitos especificados. Antes de ser exibido o menu inicial do programa, o periférico utilizado - botões - são inicializados e seu buffer é limpo, evitando resquícios de dados armazenados. Após a exibição do menu, os botões são lidos em um loop até que seja identificado o pressionamento do primeiro ou quarto botão da placa, que representam respectivamente, o inicio ou encerramento do jogo.
+A solução abrangente deste sistema reflete sua total capacidade de atender a todos os requisitos especificados. Antes de ser exibido o menu inicial do programa, o periférico utilizado - botões - são inicializados. Após a exibição do menu, os botões são lidos em um loop até que seja identificado o pressionamento do primeiro ou quarto botão da placa, que representam respectivamente, o inicio ou encerramento do jogo.
 
 Caso o botão pressionado seja o quarto, a conexão com os drivers dos botões é fechada e o programa é encerrado.
 
