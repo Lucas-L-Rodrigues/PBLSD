@@ -204,7 +204,7 @@ Módulo indicado pelo nome "KEYS". As funções utilizadas são:
 
 A seguir, a interface em modo texto exibida para o usuário no terminal, juntamente com as situações em que o uso dos botões interfere no andamento do jogo.
 
-O jogo se inicia com a tela inicial mostrada abaixo. Ela exibe uma mensagem de boas vindas ao jogo e as opções de iniciar a partida ou sair do jogo. Caso o primeiro botão da placa seja pressionado, a partida se inicia. Caso o quarto botão da placa seja pressionado, uma mensagem de despedida é exibida e o sistema é encerrado. 
+O jogo se inicia com a tela inicial mostrada abaixo. Ela exibe uma mensagem de boas vindas ao jogo e as opções de iniciar a partida ou sair do jogo. Caso o usuário deseje iniciar partida, a partida se inicia. Caso o usuário deseje sair do jogo, uma mensagem de despedida é exibida e o sistema é encerrado. 
 
 <p align="center">
   <img src="Imagens/Menu.png" width = "600" />
@@ -300,7 +300,7 @@ Existem duas condições de finalização de uma partida: vitória de um dos 2 j
 <h2> Captando Eventos do Mouse </h2>
 <div align="justify">
 
-Para implementar tanto a seleção dos quadrantes a depender da movimentação do mouse, quanto a confirmação da jogada a depender do clique do botão esquerdo do mouse, foi necessário desenvolver um algoritmo para captar os eventos do mouse conectado a placa. A seguir, serão exibidos em tópicos os passos necessários para concluir essa tarefa.
+Para implementar tanto a seleção dos quadrantes a depender da movimentação do mouse, quanto a confirmação da jogada a depender do clique do botão esquerdo do mouse, foi necessário acessar o arquivo especial no sistema Linux para captar os eventos do mouse conectado a placa. A seguir, serão exibidos em tópicos os passos necessários para concluir essa tarefa.
 
 <h3> Diretório dev/input/ </h3>
 
@@ -312,18 +312,18 @@ Para captura dos eventos do mouse conectado à placa DE1-SoC através de uma por
 
 <h3> Acessando dev/input/event0 </h3>
 
-O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal; "-E" é uma opção de xxd que significa "ler como little-endian"; "-l 48" instrui xxd a limitar a saída a 48 bytes. Limitar a saída a 48 bytes é feita pois os eventos de movimentação e cliques do mouse, utilizam no máximo 3 linhas no arquivo, ou seja, 48 bytes. 
+O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal; "-E" é uma opção de xxd que significa que deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian); "-l 16" instrui xxd a limitar a saída a 16 bytes. Limitar a saída a 16 bytes é feita pois apesar de eventos gravarem mais de 16 bytes de dados, apenas os 16 primeiros bytes são necessários para identificar padrões.
 
 <h3> Identificando padrões dos eventos </h3>
 
-Após abrir e ter acesso aos dados exibidos no arquivo especial através do comando shell xxd, os padrões dos eventos foram identificados. Foi constatado que o clique do botão esquerdo do mouse emite dois eventos: um que indica pressionamento do botão e outro que indica a soltura do botão. Cada um desses eventos, gravam 3 linhas de dados no arquivo, totalizando assim, 6 linhas (pressionamento e soltura).
+Após abrir e ter acesso aos dados exibidos no arquivo especial através do comando shell xxd, os padrões dos eventos foram identificados. Foi constatado que o clique do botão esquerdo do mouse emite dois eventos: um que indica pressionamento do botão e outro que indica a soltura do botão. Cada um desses eventos exibe os padrões ilustrados a seguir, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A primeira e terceira linha indicam pressionamento do botão esquerdo do mouse. A segunda e quarta linha indicam soltura do botão esquerdo do mouse.
 
 <p align="center">
   <img src="Imagens/cliqueEsq.png" width = "900" />
 </p>
 <p align="center"><strong> Padrão em hexadecimal do evento de clique esquerdo do mouse</strong></p>
 
-Os padrões de movimentação do mouse também foram identificados. Diferente do padrão de clique esquerdo, os padrões de movimentação gravam apenas 2 linhas de dados no arquivo (32 bytes).
+Os padrões de movimentação do mouse também foram identificados, onde os dados marcados pelo retângulo amarelo, indicam os padrões identificados. A seguir será exibido quatro eventos captados de deslocamento a cada um dos quatro sentidos (esquerda, direita, cima, baixo).
 
 <p align="center">
   <img src="Imagens/MovCima.png" width = "900" />
@@ -349,11 +349,11 @@ Os padrões de movimentação do mouse também foram identificados. Diferente do
 
 Visando uma melhor compreensão da interação entre software e hardware, além de um melhor entendimento de como esse arquivo escreve seus dados, algumas funções de leitura de arquivo em C foram restringidas para uso. Assim, foi necessário a utilização do comando "fgets" que lê linhas de texto de um arquivo e armazena como uma string.
 
-Com os padrões devidamente indentificados, o algoritmo desenvolvido utiliza de um array de char que guarda cada linha do evento capturado. Assim, no comando "fgets" é passado como parâmetro: o array de char, o tamanho do array em bytes (quantidade de caracteres por linha para armazenar) e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que cada cada linha de evento retorna 67 caracteres (incluindo \n). Por isso o array é definido com um tamanho de 70 caracteres, garantindo que haja espaço suficiente para armazenar cada linha completamente sem estouro de array.
+Com os padrões devidamente indentificados, o sistema guarda em um array os dados do evento capturado. Assim, no comando "fgets", é passado como parâmetro: o array de char, o tamanho do array em bytes e o ponteiro do arquivo especial. Através do comando "strlen" no array, foi identificado que após a leitura do arquivo, o mesmo retorna com 33 caracteres, independente do evento capturado. Por isso o array é definido com um tamanho de 35 bytes, garantindo que haja espaço suficiente para armazenar cada evento completamente sem estouro de array.
 
-O algoritmo opera sobre um loop que continua lendo os eventos do arquivo especial até que determinada condição seja satisfeita. Caso o array seja preenchido com alguma linha de evento, ou seja, seja diferente de "NULL", o algoritmo entra em um novo loop que lê todas as linhas desse evento capturado, verificando se alguma substring presente no array corresponde a um dos padrões já identificados. Caso uma substring seja identificada, esse loop é quebrado, pois o padrão já foi identificado, dispensando a necessidade de ler o restantes das linhas do evento capturado e assim o algoritmo volta a ler o arquivo especial procurando novos eventos.
+O algoritmo opera sobre um loop que continua lendo os eventos do arquivo especial até que determinada condição seja satisfeita. Caso o array seja preenchido com algum dado de evento, ou seja, seja diferente de "NULL", o algoritmo verifica se alguma substring presente no array corresponde a um dos padrões já identificados. Caso uma substring seja identificada, a movimentação é registrada e o algoritmo volta a ler o arquivo especial procurando novos eventos.
 
-Através da lógica implementada com esse algoritmo, a tarefa de captar e identificar os eventos do mouse foi cumprida, restanto agora, implementar esse algoritmo no projeto principal: O Jogo da Velha.
+Através da lógica implementada com esse algoritmo, a tarefa de captar e identificar os eventos do mouse foi cumprida, restando agora, implementar esse algoritmo no projeto principal: O Jogo da Velha.
 
 </div>
 </div>
@@ -402,7 +402,7 @@ A solução abrangente deste sistema reflete sua total capacidade de atender a t
 
 Caso o botão pressionado seja o quarto, a conexão com os drivers dos botões é fechada e o programa é encerrado.
 
-Uma vez pressionado o primeiro botão, os elementos do jogo são iniciados e o programa entra em seu loop principal. O sistema então, entra em um segundo loop, onde aguarda as jogadas dos usuários, atualizando o tabuleiro caso uma jogada válida seja feita ou exibindo uma mensagem de error caso seja uma jogada inválida.
+Uma vez pressionado o primeiro botão, os elementos do jogo são iniciados e o programa entra em seu loop principal. O sistema então, entra em um segundo loop, onde aguarda as confirmações das jogadas dos usuários, atualizando o tabuleiro caso uma jogada válida seja feita ou exibindo uma mensagem de error caso seja uma jogada inválida.
 
 O sistema permanece nesse loop até que um vencedor seja determinado ou o limite de 9 jogadas seja alcançado. Após alguma dessas duas condições serem identificadas, o loop é encerrado, o tabuleiro final é exibido juntamente com o resultado da partida (vitória ou empate) e o usuário pode escolher entre jogar novamente ou sair do jogo.
 
@@ -413,7 +413,7 @@ Caso o botão 4 seja pressionado, a conexão com os drivers dos botões é fecha
 Para melhor compreensão da explicação, fornecemos o seguinte diagrama de fluxo detalhando o algoritmo empregado na solução geral.
 
 <p align="center">
-  <img src="Imagens/Fluxograma.png" width = "500" />
+  <img src="Imagens/Fluxograma1.png" width = "500" />
 </p>
 <p align="center"><strong> Fluxograma da solução geral do problema</strong></p>
 
@@ -484,13 +484,19 @@ Este projeto, além de cumprir com seus objetivos iniciais, permitiu uma amplia�
 <h2> Execução do Projeto  </h2>
 <div align="justify">
 
-Para iniciar o jogo, é necessário seguir os seguintes passos para obter o código-fonte, compilar o código em C e executá-lo em um dispositivo FPGA DE1-SoC. 
+Para iniciar o jogo, é necessário seguir os seguintes passos para obter o código-fonte, compilar o código em C e executá-lo em um dispositivo FPGA DE1-SoC. Também é necessário ajustar o caminho de acesso ao arquivo especial que grava eventos do mouse (event0). A depender do protocolo do sistema operacional, o arquivo pode ser o "event12" por exemplo.
 
 **Passo 1: Clonar o Repositório**
 
 Abra o terminal e execute o seguinte comando para obter o código do repositório:
 
     git clone https://github.com/Lucas-L-Rodrigues/PBLSD.git
+
+**Passo 1.1: Alterando caminho de acesso ao arquivo especial**
+
+Caso necessário, altere o caminho de acesso ao arquivo especial que grava eventos do mouse, na linha 77 do código-fonte "JogoDaVelha.c", onde X será a numeração atribuída pelo seu sistema operacional:
+
+    xxd -E -l 16 -p /dev/input/eventX
 
 **Passo 2: Compilar o Código em C**
 
