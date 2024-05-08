@@ -14,6 +14,13 @@
 #define mouseMovDireita "020000000100"  //0200 0000 0100
 #define mouseMovEsquerda "02000000ffff"  //0200 0000 ffff
 
+//Comando para acessar arquivo especial de leitura dos eventos do mouse em hexadecimal
+//-E -> xxd deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian)
+//-l 14 -> limitar a saída a 14 bytes (dados suficientes para identificar padrões)
+//-p -> representação ASCII é desconsiderada
+//dev/input/event0 -> arquivo especial que grava eventos do mouse
+#define comandoArquivoMouse "xxd -E -l 14 -p /dev/input/event0"
+
 //Códigos para alteração de cores dos prints no terminal
 #define padrao "\033[0m"
 #define vermelho "\033[1;31m"
