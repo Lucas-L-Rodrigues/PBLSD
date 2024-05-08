@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define sensibilidade 15
+#define sensibilidade 5
+
+//Usado para testar relação entre eventos de movimentações do mouse e quadrantes selecionados
 
 void zeraTemp(int *tempCima, int *tempBaixo, int *tempEsquerda, int *tempDireita){
     *tempCima = 0;
@@ -12,25 +14,22 @@ void zeraTemp(int *tempCima, int *tempBaixo, int *tempEsquerda, int *tempDireita
 }
 
 int main() {
-
     int contador = 1;
     int tempCima = 0,tempBaixo = 0,tempDireita = 0,tempEsquerda = 0;
     FILE *fp;
-    char buffer[70];
-
-    memset(buffer, 0, sizeof(buffer));
+    char buffer[32];
 
     while (1) {
-        // Abre o comando xxd -E -l 48 /dev/input/event12 em modo de leitura
-        fp = popen("xxd -E -l 48 /dev/input/event0", "r");
+        memset(buffer, 0, sizeof(buffer));
+        
+        fp = popen("xxd -E -l 14 -p /dev/input/event0", "r");
         if (fp == NULL) {
             printf("Erro ao abrir o comando.\n");
             return 1;
         }
 
-        // Lê e imprime a saída do comando
-        while (fgets(buffer, sizeof(buffer), fp) != NULL) {
-            if (strstr(buffer, "0200 0100 ffff") != NULL) {
+        if (fgets(buffer, sizeof(buffer), fp) != NULL) {
+            if (strstr(buffer, "02000100ffff") != NULL) {
                 printf("CIMA\n\n");
                 
                 if (contador > 3) {
@@ -41,12 +40,9 @@ int main() {
                         printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                memset(buffer, 0, sizeof(buffer));
-                break;
             }
 
-            else if (strstr(buffer, "0200 0100 0100") != NULL) {
+            else if (strstr(buffer, "020001000100") != NULL) {
                 printf("BAIXO\n\n");
 
                 if (contador < 7) {
@@ -57,12 +53,9 @@ int main() {
                         printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                memset(buffer, 0, sizeof(buffer));
-                break;
             }
 
-            else if (strstr(buffer, "0200 0000 ffff") != NULL) {
+            else if (strstr(buffer, "02000000ffff") != NULL) {
                 printf("ESQUERDA\n\n");
 
                 if ((contador != 1) && (contador != 4) && (contador != 7)) {
@@ -73,12 +66,9 @@ int main() {
                         printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                memset(buffer, 0, sizeof(buffer));
-                break;
             }
 
-            else if (strstr(buffer, "0200 0000 0100") != NULL) {
+            else if (strstr(buffer, "020000000100") != NULL) {
                 printf("DIREITA\n\n");
                 
                 if ((contador != 3) && (contador != 6) && (contador != 9)) {
@@ -89,12 +79,7 @@ int main() {
                         printf("o valor do contador eh: %d \n", contador);
                     }
                 }
-
-                memset(buffer, 0, sizeof(buffer));
-                break;
             }
-
-            memset(buffer, 0, sizeof(buffer));
         }
 
         pclose(fp);
