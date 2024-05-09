@@ -291,7 +291,7 @@ Para guiar o usuário sobre qual quadrante do tabuleiro ele está selecionando, 
 <p align="center">
   <img src="Imagens/tabuleiroEspelho.png" width = "500" />
 </p>
-<p align="center"><strong> Quadrantes do tabuleiro</strong></p>
+<p align="center"><strong> Tabuleiros e quadrante selecionado</strong></p>
 
 <h3> Contadores para cada tipo de movimentação </h3>
 
