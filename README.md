@@ -282,16 +282,25 @@ Através da lógica implementada com esse algoritmo, a tarefa de captar e identi
 <h2> Movimentação do mouse X Quadrante selecionado </h2>
 <div align="justify">
 
-Para fazer a relação entre os eventos capturados de movimentação do mouse com a seleção de um quadrante do tabuleiro, o algoritmo citado anteriormente foi adaptado. Como um leve deslocamente do mouse já gera um evento de movimentação, o não regulamento dessas ações dificultaria para o usuário do sistema controlar qual quadrante ele quer selecionar. Visando combater essa problemática, a solução implementada será descrita a seguir em tópicos.
+Para fazer a relação entre os eventos capturados de movimentação do mouse com a seleção de um quadrante do tabuleiro, o algoritmo citado anteriormente foi adaptado. Como um leve deslocamente do mouse já gera n eventos de movimentação, o não regulamento dessas ações dificultaria para o usuário do sistema controlar qual quadrante ele quer selecionar. Visando combater essa e outras problemáticas, as soluções implementadas serão descritas a seguir em tópicos.
+
+<h3> Como mostrar a posição selecionada no tabuleiro? </h3>
+
+Para guiar o usuário sobre qual quadrante do tabuleiro ele está selecionando, a cada mudança de quadrante, através das movimentações do mouse, é impresso em tela um número equivalente a cada quadrante de um tabuleiro de jogo da velha. Melhorando ainda mais o controle sobre as escolhas, é impresso também ao lado do tabuleiro editável pelo jogador, um tabuleiro que serve de espelho para ele orientar-se, onde cada quadrante recebe seu respectivo número. Assim, o usuário pode facilmente fazer a relação entre o número exibido do quadrante selecionado com os números equivalentes no tabuleiro espelho.
+
+<p align="center">
+  <img src="Imagens/tabuleiroEspelho.png" width = "500" />
+</p>
+<p align="center"><strong> Quadrantes do tabuleiro</strong></p>
 
 <h3> Contadores para cada tipo de movimentação </h3>
 
 A implementação dos contadores para cada tipo de movimentação, soluciona o problema de controle sobre a seleção de quadrante. Assim, cada movimentação capturada do mouse (cima, baixo, esquerda, direita) conta com um contador próprio que contabiliza quantas vezes cada ação ocorreu.
 
-Por decisão de projeto, foi definido que para um quadrante ser selecionado, é necessário que ocorra cinco capturas de determinado evento. Por exemplo, caso o quadrante selecionado seja 1 e o algoritmo capte cinco movimentação para direita, o quadrante 2 é selecionado e o valor do quadrante selecionado é atualizado em tela. Essa implementação impede também que a variável do quadrante seja impressa na tela repetidamente a qualquer tipo de movimentação do mouse.
+Por decisão de projeto, foi definido que para um quadrante ser selecionado, é necessário que ocorra cinco capturas de determinado evento. Por exemplo, caso o quadrante selecionado seja 1 e o algoritmo capte cinco movimentação para direita, o quadrante 2 é selecionado e o valor do quadrante selecionado é atualizado em tela. Essa implementação impede também que o quadrante selecionado seja impresso na tela repetidamente a qualquer tipo de movimentação do mouse.
 
 <p align="center">
-  <img src="Imagens/quadrantesTabuleiro.png" width = "200" />
+  <img src="Imagens/quadrantesTabuleiro.png" width = "300" />
 </p>
 <p align="center"><strong> Quadrantes do tabuleiro</strong></p>
 
