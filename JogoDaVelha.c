@@ -66,7 +66,7 @@ int main() {
                     //Inicializando vetor de char buffer
                     memset(buffer, 0, sizeof(buffer));
 
-                    //Executa o comando xxd -E -l 14 -p /dev/input/event0 que abre arquivo especial em modo de leitura hexadecimal
+                    //Executa o comando xxd -l 14 -p /dev/input/event0 que abre arquivo especial em modo de leitura hexadecimal
                     fp = popen(comandoArquivoMouse, "r");
                     if (fp == NULL) {
                         printf("Erro ao abrir o comando.\n");
