@@ -232,7 +232,7 @@ Para captura dos eventos do mouse conectado à placa DE1-SoC através de uma por
 
 <h3> Acessando dev/input/event0 </h3>
 
-O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal e ASCII; "-E" é uma opção de xxd que significa que deve usar a saída de texto, mesmo se o arquivo de entrada for um arquivo binário (ler como little-endian); "-l 14" instrui xxd a limitar a saída a 14 bytes; e "-p" instrui xxd a desconsiderar representação ASCII. Limitar a saída a 14 bytes é feita pois apesar de eventos emitirem mais de 14 bytes de dados, apenas os 14 primeiros bytes são necessários para identificar padrões.
+O arquivo especial é aberto utilizando um comando shell onde: "xxd" é um utilitário que converte um arquivo para uma representação hexadecimal e ASCII; "-l 14" instrui xxd a limitar a saída a 14 bytes; e "-p" instrui xxd a desconsiderar representação ASCII (hexadecimal simples). Limitar a saída a 14 bytes é feita pois apesar de eventos emitirem mais de 14 bytes de dados, apenas os 14 primeiros bytes são necessários para identificar padrões.
 
 <h3> Identificando padrões dos eventos </h3>
 
