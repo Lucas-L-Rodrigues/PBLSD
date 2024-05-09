@@ -493,7 +493,7 @@ Abra o terminal e execute o seguinte comando para obter o código do repositóri
 
 Caso necessário, altere o caminho de acesso ao arquivo especial que grava eventos do mouse, na linha 22 do arquivo header "utils.h", onde X será a numeração atribuída pelo seu sistema operacional:
 
-    xxd -E -l 14 -p /dev/input/eventX
+    xxd -l 14 -p /dev/input/eventX
 
 **Passo 2: Compilar o Código em C**
 
